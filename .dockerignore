@@ -1,0 +1,68 @@
+# Python temporary files / cache
+__pycache__/
+*.py[cod]
+*.log
+*.db
+*.sqlite3
+*.sqlite3-journal
+
+# Sensitive settings
+.env
+service_account_key.json
+*credentials*.json
+
+# Virtual environments
+.env/
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE / Editor settings
+.vscode/
+.idea/
+.history/
+.spyderproject
+.spyproject
+.ropeproject
+
+# Cache, build, and output
+build/
+dist/
+.eggs/
+*.egg-info/
+*.egg
+.mypy_cache/
+.pytype/
+.pyre/
+.tox/
+.nox/
+target/
+cython_debug/
+site/
+.dmypy.json
+__pypackages__/
+
+# Documentación y reports
+analysis/*/results/
+analysis/results/
+analysis/*/reports/
+analysis/reports/
+analysis/*/plots/
+analysis/plots/
+*_quality_analysis_*.json
+*_quality_report_*.html
+*_null_percentages_*.png
+*_unique_percentages_*.png
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile
+
+# SSH
+.ssh

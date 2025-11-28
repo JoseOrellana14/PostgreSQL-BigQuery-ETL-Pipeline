@@ -1,0 +1,42 @@
+# Use the official Python image as a base
+FROM python:3.11-slim
+
+# Install necessary packages including Git, Azure CLI, and network tools
+RUN apt-get update && apt-get install -y \
+    curl \
+    gnupg \
+    git \
+    apt-transport-https \
+    lsb-release \
+    software-properties-common \
+    slirp4netns \
+    iptables \
+    net-tools
+
+# Install Azure CLI
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+
+# Install the Google Cloud SDK
+RUN curl -sSL https://sdk.cloud.google.com | bash
+
+# Add gcloud to PATH
+ENV PATH $PATH:/root/google-cloud-sdk/bin
+
+# Install the Functions Framework for Python
+RUN pip install functions-framework
+
+# Set up a work directory
+WORKDIR /workspace
+
+# Install project dependencies
+COPY ./requirements.txt /workspace/
+RUN pip install -r requirements.txt
+
+# Copy all project files
+COPY . .
+
+# Expose the default port for Cloud Functions
+EXPOSE 8080
+
+# Define the command to run your cloud function
+CMD ["functions-framework", "--target", "main_function"]

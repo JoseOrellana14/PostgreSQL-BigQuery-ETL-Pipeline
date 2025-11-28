@@ -1,0 +1,12 @@
+functions-framework
+google-cloud-functions
+google-cloud-bigquery
+google-cloud-storage
+google-cloud-secret-manager
+pandas
+python-dotenv
+flask
+petl
+psycopg2-binary
+pyarrow
+google-cloud-secret-manager

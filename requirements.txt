@@ -1,0 +1,28 @@
+functions-framework
+
+#psycopg2-binary==2.9.7
+psycopg2-binary>=2.9.9
+google-cloud-bigquery==3.11.3
+python-dotenv
+google-cloud-secret-manager
+pyarrow
+pandas-gbq
+petl
+flask
+pandas
+
+# Data analysis and visualization
+matplotlib==3.7.1
+seaborn==0.12.2
+numpy<2
+
+# Testing dependencies
+pytest==7.4.0
+pytest-cov==4.1.0
+pytest-mock==3.11.1
+
+# Fuzzy matching
+rapidfuzz==3.5.2
+
+# Excel
+openpyxl>=3.1.2
