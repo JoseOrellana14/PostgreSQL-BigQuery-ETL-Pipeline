@@ -1,0 +1,57 @@
+[
+    {
+        "mode": "REQUIRED",
+        "name": "organization_id",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "legal_name",
+        "type": "STRING"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "commercial_name",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "chatbot_enabled_default",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "is_active",
+        "type": "BOOLEAN"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "state",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "created_at",
+        "type": "TIMESTAMP"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "updated_at",
+        "type": "TIMESTAMP"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "created_by",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "updated_by",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "load_date",
+        "type": "TIMESTAMP"
+    }
+]
