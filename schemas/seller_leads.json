@@ -1,0 +1,142 @@
+[
+    {
+        "mode": "REQUIRED",
+        "name": "seller_lead_id",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "organization_id",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "user_id",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "full_name",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "email",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "phone",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "origin_channel",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "origin_detail",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "status",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "chatbot_enabled_user",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "seller_price",
+        "type": "float"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "stage_seller",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "accepted",
+        "type": "BOOLEAN"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "accepted_at",
+        "type": "TIMESTAMP"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "rejected_reason",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "property_id",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "accepted",
+        "type": "BOOLEAN"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "intake_payload",
+        "type": "JSON"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "intake_features",
+        "type": "JSON"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "pre_capture_score",
+        "type": "FLOAT"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "pre_score_version",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "pre_scored_at",
+        "type": "TIMESTAMP"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "state",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "created_at",
+        "type": "TIMESTAMP"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "updated_at",
+        "type": "TIMESTAMP"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "created_by",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "updated_by",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "load_date",
+        "type": "TIMESTAMP"
+    }
+]

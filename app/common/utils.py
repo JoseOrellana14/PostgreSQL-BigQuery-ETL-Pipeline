@@ -70,6 +70,8 @@ def convert_column_types(table, schema):
             table = etl.convert(table, column_name, convert_timestamp)
         elif column_type == 'STRING':
             table = etl.convert(table, column_name, lambda v: str(v) if v is not None else None)
+        elif column_type == 'JSON':
+            table = etl.convert(table, column_name, lambda v: json(v) if v is not None else None)
         elif column_type == 'BOOLEAN':
             table = etl.convert(table, column_name, lambda v: bool(v) if isinstance(v, bool) else (
                 str(v).strip().lower() == 'true' if v not in (None, '', 'nan', 'none') else None
@@ -141,7 +143,8 @@ def convert_json_schema_to_bq_schema(schema_json):
         'INTEGER': 'INT64',
         'FLOAT': 'FLOAT64',
         'TIMESTAMP': 'TIMESTAMP',
-        'BOOLEAN': 'BOOL'
+        'BOOLEAN': 'BOOL',
+        'JSON': 'JSON'
     }
 
     return [
