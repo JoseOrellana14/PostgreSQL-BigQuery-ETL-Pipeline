@@ -21,8 +21,8 @@
     },
     {
         "mode": "NULLABLE",
-        "name": "is_active",
-        "type": "BOOLEAN"
+        "name": "status",
+        "type": "STRING"
     },
     {
         "mode": "NULLABLE",

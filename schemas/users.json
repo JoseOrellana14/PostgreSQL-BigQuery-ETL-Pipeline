@@ -1,0 +1,72 @@
+[
+    {
+        "mode": "REQUIRED",
+        "name": "user_id",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "organization_id",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "full_name",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "email",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "phone",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "role",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "status",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "chatbot_enabled_user",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "state",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "created_at",
+        "type": "TIMESTAMP"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "updated_at",
+        "type": "TIMESTAMP"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "created_by",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "updated_by",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "load_date",
+        "type": "TIMESTAMP"
+    }
+]

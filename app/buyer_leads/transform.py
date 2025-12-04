@@ -37,6 +37,37 @@ def transfrom_buyer_leads(buyer_leads_table, load_date):
         # Getting the table's load date
         buyer_leads_df['load_date'] = load_date
 
+        # Additional transformations
+        # Force last_name data type to STRING and capitalize
+        buyer_leads_df['last_name'] = buyer_leads_df['last_name'].astype(str).str.title()
+        
+        # Fill NaN values in name with empty strings and capitalize
+        buyer_leads_df['name'] = buyer_leads_df['name'].fillna('').str.title()
+
+        # Create full_name column by concatenating the name components
+        # Only include non-empty and non-space-only values
+        name_components = []
+        
+        # Helper function to check if a value is meaningful
+        def is_meaningful(value):
+            return pd.notna(value) and str(value).strip() != ''
+        
+        # Add each name component if it's meaningful
+        if 'last_name' in buyer_leads_df.columns:
+            name_components.append(buyer_leads_df['last_name'])
+        if 'name' in buyer_leads_df.columns:
+            name_components.append(buyer_leads_df['name'])
+        
+        # Join only the meaningful components with spaces
+        buyer_leads_df['full_name'] = name_components[0].apply(lambda x: x if is_meaningful(x) else '')
+        for component in name_components[1:]:
+            buyer_leads_df['full_name'] = buyer_leads_df['full_name'] + ' ' + \
+                                      component.apply(lambda x: x if is_meaningful(x) else '')
+        
+        # Clean up the full_name column (remove extra spaces)
+        buyer_leads_df['full_name'] = buyer_leads_df['full_name'].str.strip().replace(r'\s+', ' ', regex=True)
+
+
         # Explicityly convert date fields to pandas datetime
         date_fields = ['created_at', 'updated_at']
         for field in date_fields:
