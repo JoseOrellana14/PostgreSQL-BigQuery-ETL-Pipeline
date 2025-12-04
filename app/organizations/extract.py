@@ -18,7 +18,7 @@ def extract_organizations(last_loaded=None):
         legal_name,
         commercial_name,
         chatbot_enabled_default,
-        is_active,
+        status,
         state,
         created_at,
         updated_at,

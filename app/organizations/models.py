@@ -8,8 +8,8 @@ class Organization:
     organization_id: int
     legal_name: str
     commercial_name: str
-    chatbot_enabled_default: Optional[str] = None
-    is_active: Optional[bool] = None
+    chatbot_enabled_default: Optional[bool] = None
+    status: Optional[str] = None
     state: Optional[int] = None
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
