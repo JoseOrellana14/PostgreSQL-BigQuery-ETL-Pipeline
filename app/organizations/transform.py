@@ -9,7 +9,7 @@ from logging_config import setup_logging
 setup_logging()
 logger = logging.getLogger(__name__)
 
-def transfrom_organizations(organizations_table, load_date):
+def transform_organizations(organizations_table, load_date):
     """Transform organizations data and convert to a clean DataFrame"""
     try:
         # Load the schema

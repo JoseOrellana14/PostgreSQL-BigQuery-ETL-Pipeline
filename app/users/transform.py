@@ -9,7 +9,7 @@ from logging_config import setup_logging
 setup_logging()
 logger = logging.getLogger(__name__)
 
-def transfrom_users(users_table, load_date):
+def transform_users(users_table, load_date):
     """Transform users data and convert to a clean DataFrame"""
     try:
         # Load the schema

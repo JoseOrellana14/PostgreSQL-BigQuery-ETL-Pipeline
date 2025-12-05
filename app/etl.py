@@ -1,4 +1,8 @@
-from app.organizations import extract_organizations, trasnform_organizations, load_organizations
+from app.organizations import extract_organizations, transform_organizations, load_organizations
+from app.users import extract_users, transform_users
+from app.buyer_leads import extract_buyer_leads, transform_buyer_leads
+from app.seller_leads import extract_seller_leads, transform_seller_leads
+from app.property_units import extract_property_units, transform_property_units
 from app.common.utils import get_load_date, get_last_loaded_timestamp
 
 def run_etl():
@@ -20,13 +24,84 @@ def run_etl():
     print(f"Extracted organizations data.")
 
     print("Transforming organizations data...")
-    organizations_df = trasnform_organizations(organizations, load_date)
+    organizations_df = transform_organizations(organizations, load_date)
     print(f"Transformed organizations data.")
 
     print("Loading organizations data into BigQuery...")
     load_organizations(organizations_df)
     print("Organizations data loaded.")
 
+    # =================
+    # Users ETL
+    # =================
+    last_loaded_users = get_last_loaded_timestamp("users", dataset=DATASET)
+    print(f"Last loaded users: {last_loaded_users}")
+
+    print("Extracting users data...")
+    users = extract_users(last_loaded_users)
+    print(f"Extracted users data.")
+
+    print("Transforming users data...")
+    users_df = transform_users(users, load_date)
+    print(f"Transformed users data.")
+
+    print("Loading users data into BigQuery...")
+    # load_organizations(users_df)
+    print("Users data loaded.")
+
+    # =================
+    # Buyer Leads ETL
+    # =================
+    last_loaded_buyer_leads = get_last_loaded_timestamp("buyer_leads", dataset=DATASET)
+    print(f"Last loaded buyer leads: {last_loaded_buyer_leads}")
+
+    print("Extracting buyer leads data...")
+    buyer_leads = extract_buyer_leads(last_loaded_buyer_leads)
+    print(f"Extracted buyer leads data.")
+
+    print("Transforming buyer leads data...")
+    buyer_leads_df = transform_buyer_leads(buyer_leads, load_date)
+    print(f"Transformed buyer leads data.")
+
+    print("Loading buyer leads data into BigQuery...")
+    # load_organizations(buyer_leads_df)
+    print("buyer leads data loaded.")
+
+    # =================
+    # Seller Leads ETL
+    # =================
+    last_loaded_seller_leads = get_last_loaded_timestamp("seller_leads", dataset=DATASET)
+    print(f"Last loaded seller leads: {last_loaded_seller_leads}")
+
+    print("Extracting seller leads data...")
+    seller_leads = extract_seller_leads(last_loaded_seller_leads)
+    print(f"Extracted seller leads data.")
+
+    print("Transforming seller leads data...")
+    seller_leads_df = transform_seller_leads(seller_leads, load_date)
+    print(f"Transformed seller leads data.")
+
+    print("Loading seller leads data into BigQuery...")
+    # load_organizations(seller_leads_df)
+    print("seller leads data loaded.")
+
+    # =================
+    # Property Units ETL
+    # =================
+    last_loaded_property_units = get_last_loaded_timestamp("property_units", dataset=DATASET)
+    print(f"Last loaded property units: {last_loaded_property_units}")
+
+    print("Extracting property units data...")
+    property_units = extract_property_units(last_loaded_property_units)
+    print(f"Extracted property units data.")
+
+    print("Transforming property units data...")
+    property_units_df = transform_property_units(property_units, load_date)
+    print(f"Transformed property units data.")
+
+    print("Loading property units data into BigQuery...")
+    # load_organizations(property_units_df)
+    print("property units data loaded.")
 
 
 if __name__ == "__main__":
