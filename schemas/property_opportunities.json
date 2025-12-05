@@ -1,0 +1,127 @@
+[
+    {
+        "mode": "REQUIRED",
+        "name": "property_opportunity_id",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "organization_id",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "user_id",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "buyer_lead_id",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "seller_lead_id",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "property_unit_id",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "stage",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "bidding_state",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "next_appointment_at",
+        "type": "TIMESTAMP"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "last_contacted_at",
+        "type": "TIMESTAMP"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "initial_price",
+        "type": "FLAOT"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "offer_price_buyer",
+        "type": "FLAOT"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "counter_price_seller",
+        "type": "FLAOT"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "last_offer_at",
+        "type": "TIMESTAMP"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "last_counter_at",
+        "type": "TIMESTAMP"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "pair_score",
+        "type": "FLOAT"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "pair_score_version",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "pair_scored_at",
+        "type": "TIMESTAMP"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "is_won",
+        "type": "BOOLEAN"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "state",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "created_at",
+        "type": "TIMESTAMP"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "updated_at",
+        "type": "TIMESTAMP"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "created_by",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "updated_by",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "load_date",
+        "type": "TIMESTAMP"
+    }
+]
