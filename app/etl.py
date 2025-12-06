@@ -1,12 +1,12 @@
-from app.organizations import extract_organizations, transform_organizations, load_organizations
-from app.users import extract_users, transform_users
-from app.buyer_leads import extract_buyer_leads, transform_buyer_leads
-from app.seller_leads import extract_seller_leads, transform_seller_leads
-from app.property_units import extract_property_units, transform_property_units
-from app.property_opportunities import extract_property_opportunities, transform_property_opportunities
-from app.property_sales import extract_property_sales, transform_property_sales
-from app.chat_messages import extract_chat_messages, transform_chat_messages
-from app.common.utils import get_load_date, get_last_loaded_timestamp
+from app.organizations import extract_organizations, transform_organizations, load_organizations, ORGANIZATION_SCHEMA_PATH
+from app.users import extract_users, transform_users, USER_SCHEMA_PATH
+from app.buyer_leads import extract_buyer_leads, transform_buyer_leads, BUYER_LEAD_SCHEMA_PATH
+from app.seller_leads import extract_seller_leads, transform_seller_leads, SELLER_LEAD_SCHEMA_PATH
+from app.property_units import extract_property_units, transform_property_units, PROPERTY_UNIT_SCHEMA_PATH
+from app.property_opportunities import extract_property_opportunities, transform_property_opportunities, PROPERTY_OPPORTUNITY_SCHEMA_PATH
+from app.property_sales import extract_property_sales, transform_property_sales, PROPERTY_SALE_SCHEMA_PATH
+from app.chat_messages import extract_chat_messages, transform_chat_messages, CHAT_MESSAGE_SCHEMA_PATH
+from app.common.utils import get_load_date, get_last_loaded_timestamp, load_dataframe_with_merge
 
 def run_etl():
     """Run the full ETL process."""
@@ -31,7 +31,13 @@ def run_etl():
     print(f"Transformed organizations data.")
 
     print("Loading organizations data into BigQuery...")
-    load_organizations(organizations_df)
+    load_dataframe_with_merge(
+    df=organizations_df,
+    bq_table_env_var="BQ_ORGANIZATIONS_TABLE",
+    schema_path=ORGANIZATION_SCHEMA_PATH,
+    key_column="organization_id",
+    updated_at_col="updated_at",
+    )
     print("Organizations data loaded.")
 
     # =================
@@ -49,7 +55,13 @@ def run_etl():
     print(f"Transformed users data.")
 
     print("Loading users data into BigQuery...")
-    # load_organizations(users_df)
+    load_dataframe_with_merge(
+    df=users_df,
+    bq_table_env_var="BQ_USERS_TABLE",
+    schema_path=USER_SCHEMA_PATH,
+    key_column="user_id",
+    updated_at_col="updated_at",
+    )
     print("Users data loaded.")
 
     # =================
@@ -67,7 +79,13 @@ def run_etl():
     print(f"Transformed buyer leads data.")
 
     print("Loading buyer leads data into BigQuery...")
-    # load_organizations(buyer_leads_df)
+    load_dataframe_with_merge(
+    df=buyer_leads_df,
+    bq_table_env_var="BQ_BUYER_LEADS_TABLE",
+    schema_path=BUYER_LEAD_SCHEMA_PATH,
+    key_column="buyer_lead_id",
+    updated_at_col="updated_at",
+    )
     print("buyer leads data loaded.")
 
     # =================
@@ -85,7 +103,13 @@ def run_etl():
     print(f"Transformed seller leads data.")
 
     print("Loading seller leads data into BigQuery...")
-    # load_organizations(seller_leads_df)
+    load_dataframe_with_merge(
+    df=seller_leads_df,
+    bq_table_env_var="BQ_SELLER_LEADS_TABLE",
+    schema_path=SELLER_LEAD_SCHEMA_PATH,
+    key_column="seller_lead_id",
+    updated_at_col="updated_at",
+    )
     print("seller leads data loaded.")
 
     # =================
@@ -103,7 +127,13 @@ def run_etl():
     print(f"Transformed property units data.")
 
     print("Loading property units data into BigQuery...")
-    # load_organizations(property_units_df)
+    load_dataframe_with_merge(
+    df=property_units_df,
+    bq_table_env_var="BQ_PROPERTY_UNITS_TABLE",
+    schema_path=PROPERTY_UNIT_SCHEMA_PATH,
+    key_column="property_unit_id",
+    updated_at_col="updated_at",
+    )
     print("property units data loaded.")
 
     # =================
@@ -121,7 +151,13 @@ def run_etl():
     print(f"Transformed property opportunities data.")
 
     print("Loading property opportunities data into BigQuery...")
-    # load_organizations(property_opportunities_df)
+    load_dataframe_with_merge(
+    df=property_opportunities_df,
+    bq_table_env_var="BQ_PROPERTY_OPPORTUNITIES_TABLE",
+    schema_path=PROPERTY_OPPORTUNITY_SCHEMA_PATH,
+    key_column="property_opportunity_id",
+    updated_at_col="updated_at",
+    )
     print("property opportunities data loaded.")
 
     # =================
@@ -139,7 +175,13 @@ def run_etl():
     print(f"Transformed property sales data.")
 
     print("Loading property sales data into BigQuery...")
-    # load_organizations(property_sales_df)
+    load_dataframe_with_merge(
+    df=property_sales_df,
+    bq_table_env_var="BQ_PROPERTY_SALES_TABLE",
+    schema_path=PROPERTY_SALE_SCHEMA_PATH,
+    key_column="property_sale_id",
+    updated_at_col="updated_at",
+    )
     print("property sales data loaded.")
 
     # =================
@@ -157,7 +199,13 @@ def run_etl():
     print(f"Transformed chat messages data.")
 
     print("Loading chat messages data into BigQuery...")
-    # load_organizations(chat_messages_df)
+    load_dataframe_with_merge(
+    df=chat_messages_df,
+    bq_table_env_var="BQ_CHAT_MESSAGES_TABLE",
+    schema_path=CHAT_MESSAGE_SCHEMA_PATH,
+    key_column="chat_message_id",
+    updated_at_col="updated_at",
+    )
     print("chat messages data loaded.")
 
 if __name__ == "__main__":

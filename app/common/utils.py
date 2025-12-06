@@ -2,11 +2,16 @@ import petl as etl
 import json
 import pandas as pd
 import numpy as np
+import os
+import logging
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 from google.cloud import bigquery
-from app.common.config import get_bq_credentials
+from app.common.config import get_bq_credentials, validate_env_variables
+from logging_config import setup_logging
 
+setup_logging()
+logger = logging.getLogger(__name__)
 
 def filter_columns(df, schema_columns):
     """Keep only the columns specified in the schema."""
@@ -166,3 +171,55 @@ def upload_dataframe_to_bq(df, table_id, bq_schema=None, credentials=None, write
 
     job = client.load_table_from_dataframe(df, table_id, job_config=job_config)
     job.result()  # Wait for the job to complete
+
+def load_dataframe_with_merge(
+    df,
+    bq_table_env_var: str,
+    schema_path: str,
+    key_column: str,
+    updated_at_col: str,
+):
+    """
+    Load a DataFrame into BigQuery using MERGE (upsert), parametrized by table.
+
+    Params:
+        df               : pandas.DataFrame to load
+        bq_table_env_var : name of the env var that contains the name of the BQ table
+                           (eg: 'BQ_ORGANIZATIONS_TABLE', 'BQ_BUYER_LEADS_TABLE', ...)
+        schema_path      : path to the JSON schema of BigQuery for the table
+        key_column       : name of the PK in the BQ table (eg: 'organization_id')
+        updated_at_col   : timestamp column used for incremental laod (eg: 'updated_at')
+    """
+
+    try:
+        # Validar env vars
+        validate_env_variables("BQ_PROJECT", "BQ_DATASET", bq_table_env_var)
+
+        project = os.getenv("BQ_PROJECT")
+        dataset = os.getenv("BQ_DATASET")
+        table_name = os.getenv(bq_table_env_var)
+
+        if not table_name:
+            raise Exception(f"Environment variable {bq_table_env_var} is not set.")
+
+        table_id = f"{project}.{dataset}.{table_name}"
+
+        # Leer schema JSON y convertirlo a SchemaField[]
+        schema = load_schema(schema_path)
+        bq_schema = convert_json_schema_to_bq_schema(schema)
+
+        # Usar tu función genérica de MERGE
+        merge_dataframe_to_bq(
+            df=df,
+            table_id=table_id,
+            key_column=key_column,
+            updated_at_col=updated_at_col,
+            bq_schema=bq_schema,
+            credentials=get_bq_credentials(),
+        )
+
+        logger.info(f"Loaded {len(df)} rows into {table_id}")
+
+    except Exception:
+        logger.exception(f"Error loading data into BigQuery for table env {bq_table_env_var}")
+        raise
