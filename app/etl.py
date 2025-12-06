@@ -4,6 +4,7 @@ from app.buyer_leads import extract_buyer_leads, transform_buyer_leads
 from app.seller_leads import extract_seller_leads, transform_seller_leads
 from app.property_units import extract_property_units, transform_property_units
 from app.property_opportunities import extract_property_opportunities, transform_property_opportunities
+from app.property_sales import extract_property_sales, transform_property_sales
 from app.common.utils import get_load_date, get_last_loaded_timestamp
 
 def run_etl():
@@ -122,6 +123,23 @@ def run_etl():
     # load_organizations(property_opportunities_df)
     print("property opportunities data loaded.")
 
+    # =================
+    # Property Sales ETL
+    # =================
+    last_loaded_property_sales = get_last_loaded_timestamp("property_sales", dataset=DATASET)
+    print(f"Last loaded property sales: {last_loaded_property_sales}")
+
+    print("Extracting property sales data...")
+    property_sales = extract_property_sales(last_loaded_property_sales)
+    print(f"Extracted property sales data.")
+
+    print("Transforming property sales data...")
+    property_sales_df = transform_property_sales(property_sales, load_date)
+    print(f"Transformed property sales data.")
+
+    print("Loading property sales data into BigQuery...")
+    # load_organizations(property_sales_df)
+    print("property sales data loaded.")
 
 if __name__ == "__main__":
     run_etl()
