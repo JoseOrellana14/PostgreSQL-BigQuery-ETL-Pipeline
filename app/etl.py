@@ -5,6 +5,7 @@ from app.seller_leads import extract_seller_leads, transform_seller_leads
 from app.property_units import extract_property_units, transform_property_units
 from app.property_opportunities import extract_property_opportunities, transform_property_opportunities
 from app.property_sales import extract_property_sales, transform_property_sales
+from app.chat_messages import extract_chat_messages, transform_chat_messages
 from app.common.utils import get_load_date, get_last_loaded_timestamp
 
 def run_etl():
@@ -140,6 +141,24 @@ def run_etl():
     print("Loading property sales data into BigQuery...")
     # load_organizations(property_sales_df)
     print("property sales data loaded.")
+
+    # =================
+    # Chat messages ETL
+    # =================
+    last_loaded_chat_messages = get_last_loaded_timestamp("chat_messages", dataset=DATASET)
+    print(f"Last loaded chat messages: {last_loaded_chat_messages}")
+
+    print("Extracting chat messages data...")
+    chat_messages = extract_chat_messages(last_loaded_chat_messages)
+    print(f"Extracted chat messages data.")
+
+    print("Transforming chat messages data...")
+    chat_messages_df = transform_chat_messages(chat_messages, load_date)
+    print(f"Transformed chat messages data.")
+
+    print("Loading chat messages data into BigQuery...")
+    # load_organizations(chat_messages_df)
+    print("chat messages data loaded.")
 
 if __name__ == "__main__":
     run_etl()

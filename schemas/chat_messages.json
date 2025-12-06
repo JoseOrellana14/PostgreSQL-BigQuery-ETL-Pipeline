@@ -1,0 +1,102 @@
+[
+    {
+        "mode": "REQUIRED",
+        "name": "chat_message_id",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "organization_id",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "user_id",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "buyer_lead_id",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "seller_lead_id",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "property_opportunity_id",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "channel",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "direction",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "sent_at",
+        "type": "TIMESTAMP"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "delivered_at",
+        "type": "TIMESTAMP"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "read_at",
+        "type": "TIMESTAMP"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "has_media",
+        "type": "BOOLEAN"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "body",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "char_count",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "state",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "created_at",
+        "type": "TIMESTAMP"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "updated_at",
+        "type": "TIMESTAMP"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "created_by",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "updated_by",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "load_date",
+        "type": "TIMESTAMP"
+    }
+]
