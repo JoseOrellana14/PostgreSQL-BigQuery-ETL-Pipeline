@@ -7,7 +7,9 @@ class Chat_Message:
     """Chat Message data model."""
     chat_message_id: int
     organization_id: int
-    user_id: int
+    sender_phone: Optional[str] = None
+    reciever_phone: Optional[str] = None
+    user_id: Optional[int] = None
     buyer_lead_id: Optional[int] = None
     seller_lead_id: Optional[int] = None
     property_opportunity_id: Optional[int] = None

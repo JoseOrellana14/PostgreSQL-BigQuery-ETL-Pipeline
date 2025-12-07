@@ -21,13 +21,13 @@
     },
     {
         "mode": "REQUIRED",
-        "name": "seller_lead_id",
+        "name": "property_unit_id",
         "type": "INTEGER"
     },
     {
-        "mode": "REQUIRED",
-        "name": "property_unit_id",
-        "type": "INTEGER"
+        "mode": "NULLABLE",
+        "name": "operation_type",
+        "type": "STRING"
     },
     {
         "mode": "NULLABLE",

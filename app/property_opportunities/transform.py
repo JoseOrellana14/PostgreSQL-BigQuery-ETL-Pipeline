@@ -25,7 +25,7 @@ def transform_property_opportunities(property_opportunities_table, load_date):
         property_opportunities_df = etl.todataframe(property_opportunities_table)
 
         # Mandatory Keys
-        mandatory_keys = ['property_opportunity_id', 'organization_id', 'user_id', 'buyer_lead_id', 'seller_lead_id', 'property_unit_id']
+        mandatory_keys = ['property_opportunity_id', 'organization_id', 'user_id', 'buyer_lead_id', 'property_unit_id']
         for key in mandatory_keys:
             if key in property_opportunities_df.columns:
                 property_opportunities_df[key] = pd.to_numeric(property_opportunities_df[key], errors='coerce')

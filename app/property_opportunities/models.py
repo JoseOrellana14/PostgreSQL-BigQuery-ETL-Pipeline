@@ -9,8 +9,8 @@ class Property_Opportunity:
     organization_id: int
     user_id: int
     buyer_lead_id: int
-    seller_lead_id: int
     property_unit_id: int
+    operation_type: Optional[str] = None
     stage: Optional[str] = None
     bidding_state: Optional[str] = None
     next_appointment_at: Optional[datetime] = None

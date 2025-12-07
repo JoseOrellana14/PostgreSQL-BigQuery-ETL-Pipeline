@@ -61,6 +61,16 @@
     },
     {
         "mode": "NULLABLE",
+        "name": "reason_to_sell",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "willingness_to_negotiate",
+        "type": "BOOLEAN"
+    },
+    {
+        "mode": "NULLABLE",
         "name": "accepted",
         "type": "BOOLEAN"
     },
@@ -76,7 +86,7 @@
     },
     {
         "mode": "NULLABLE",
-        "name": "property_id",
+        "name": "property_unit_id",
         "type": "INTEGER"
     },
     {

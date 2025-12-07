@@ -24,6 +24,7 @@ def extract_property_units(last_loaded=None):
         area_sqm,
         price,
         currency,
+        operation_type,
         listing_status,
         amenities,
         state,

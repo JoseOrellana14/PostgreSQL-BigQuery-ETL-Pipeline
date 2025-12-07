@@ -18,10 +18,12 @@ class Seller_Lead:
     chatbot_enabled: Optional[bool] = None
     seller_price: Optional[float] = None
     stage_seller: Optional[str] = None
+    reason_to_sell: Optional[str] = None
+    willingness_to_negotiate: Optional[bool] = None
     accepted: Optional[bool] = None
     accepted_at: Optional[datetime] = None
     rejected_reason: Optional[str] = None
-    property_id: Optional[int] = None
+    property_unit_id: Optional[int] = None
     intake_payload: Optional[Dict[str, Any]] = None
     intake_features: Optional[Dict[str, Any]] = None
     pre_capture_score: Optional[float] = None

@@ -15,6 +15,7 @@ class Property_Unit:
     area_sqm: Optional[float] = None
     price: Optional[float] = None
     currency: Optional[str] = None
+    operation_type: Optional[str] = None
     listing_status: Optional[str] = None
     amenities: Optional[Dict[str, Any]] = None
     state: Optional[int] = None

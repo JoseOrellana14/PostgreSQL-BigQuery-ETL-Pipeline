@@ -11,6 +11,16 @@
     },
     {
         "mode": "REQUIRED",
+        "name": "sender_phone",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "reciever_phone",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "REQUIRED",
         "name": "user_id",
         "type": "INTEGER"
     },

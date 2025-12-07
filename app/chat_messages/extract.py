@@ -16,6 +16,8 @@ def extract_chat_messages(last_loaded=None):
     SELECT
         id as chat_message_id,
         organization_id,
+        sender_phone,
+        reciever_phone,
         user_id,
         buyer_lead_id,
         seller_lead_id,

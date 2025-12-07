@@ -51,6 +51,11 @@
     },
     {
         "mode": "NULLABLE",
+        "name": "operation_type",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
         "name": "listing_status",
         "type": "STRING"
     },
