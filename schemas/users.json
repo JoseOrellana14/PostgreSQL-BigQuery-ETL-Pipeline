@@ -37,7 +37,7 @@
     {
         "mode": "NULLABLE",
         "name": "chatbot_enabled_user",
-        "type": "STRING"
+        "type": "BOOLEAN"
     },
     {
         "mode": "NULLABLE",

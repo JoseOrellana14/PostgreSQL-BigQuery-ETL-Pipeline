@@ -17,7 +17,7 @@
     {
         "mode": "NULLABLE",
         "name": "chatbot_enabled_default",
-        "type": "STRING"
+        "type": "BOOLEAN"
     },
     {
         "mode": "NULLABLE",

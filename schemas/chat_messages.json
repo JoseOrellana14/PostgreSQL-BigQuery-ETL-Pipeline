@@ -12,30 +12,30 @@
     {
         "mode": "REQUIRED",
         "name": "sender_phone",
-        "type": "INTEGER"
+        "type": "STRING"
     },
     {
         "mode": "REQUIRED",
         "name": "reciever_phone",
-        "type": "INTEGER"
+        "type": "STRING"
     },
     {
-        "mode": "REQUIRED",
+        "mode": "NULLABLE",
         "name": "user_id",
         "type": "INTEGER"
     },
     {
-        "mode": "REQUIRED",
+        "mode": "NULLABLE",
         "name": "buyer_lead_id",
         "type": "INTEGER"
     },
     {
-        "mode": "REQUIRED",
+        "mode": "NULLABLE",
         "name": "seller_lead_id",
         "type": "INTEGER"
     },
     {
-        "mode": "REQUIRED",
+        "mode": "NULLABLE",
         "name": "property_opportunity_id",
         "type": "INTEGER"
     },

@@ -47,7 +47,7 @@
     {
         "mode": "NULLABLE",
         "name": "chatbot_enabled_user",
-        "type": "STRING"
+        "type": "BOOLEAN"
     },
     {
         "mode": "NULLABLE",
@@ -67,7 +67,7 @@
     {
         "mode": "NULLABLE",
         "name": "willingness_to_negotiate",
-        "type": "BOOLEAN"
+        "type": "STRING"
     },
     {
         "mode": "NULLABLE",
@@ -88,11 +88,6 @@
         "mode": "NULLABLE",
         "name": "property_unit_id",
         "type": "INTEGER"
-    },
-    {
-        "mode": "NULLABLE",
-        "name": "accepted",
-        "type": "BOOLEAN"
     },
     {
         "mode": "NULLABLE",
