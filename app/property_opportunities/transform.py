@@ -38,7 +38,7 @@ def transform_property_opportunities(property_opportunities_table, load_date):
         property_opportunities_df['load_date'] = load_date
 
         # Explicityly convert date fields to pandas datetime
-        date_fields = ['created_at', 'updated_at']
+        date_fields = ['created_at', 'updated_at', 'load_date']
         for field in date_fields:
             if field in property_opportunities_df.columns:
                 property_opportunities_df[field] = pd.to_datetime(property_opportunities_df[field], errors='coerce')

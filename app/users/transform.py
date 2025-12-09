@@ -69,7 +69,7 @@ def transform_users(users_table, load_date):
 
 
         # Explicityly convert date fields to pandas datetime
-        date_fields = ['created_at', 'updated_at']
+        date_fields = ['created_at', 'updated_at' 'load_date']
         for field in date_fields:
             if field in users_df.columns:
                 users_df[field] = pd.to_datetime(users_df[field], errors='coerce')

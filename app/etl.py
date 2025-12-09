@@ -6,6 +6,7 @@ from app.property_units import extract_property_units, transform_property_units,
 from app.property_opportunities import extract_property_opportunities, transform_property_opportunities, PROPERTY_OPPORTUNITY_SCHEMA_PATH
 from app.property_sales import extract_property_sales, transform_property_sales, PROPERTY_SALE_SCHEMA_PATH
 from app.chat_messages import extract_chat_messages, transform_chat_messages, CHAT_MESSAGE_SCHEMA_PATH
+from app.appointments import extract_appointments, transform_appointments, APPOINTMENT_SCHEMA_PATH
 from app.common.utils import get_load_date, get_last_loaded_timestamp, load_dataframe_with_merge
 
 def run_etl():
@@ -207,6 +208,32 @@ def run_etl():
     updated_at_col="updated_at",
     )
     print("chat messages data loaded.")
+
+    # =================
+    # Appointments ETL
+    # =================
+    last_loaded_appointments = get_last_loaded_timestamp("appointments", dataset=DATASET)
+    print(f"Last loaded appointments: {last_loaded_appointments}")
+
+    print("Extracting appointments data...")
+    appointments = extract_appointments(last_loaded_appointments)
+    print(f"Extracted appointments data.")
+
+    print("Transforming appointments data...")
+    appointments_df = transform_appointments(appointments, load_date)
+    print(f"Transformed appointments data.")
+
+    print("Loading appointments data into BigQuery...")
+    load_dataframe_with_merge(
+    df=appointments_df,
+    bq_table_env_var="BQ_APPOINTMENTS_TABLE",
+    schema_path=APPOINTMENT_SCHEMA_PATH,
+    key_column="appointment_id",
+    updated_at_col="updated_at",
+    )
+    print("appointments data loaded.")
+
+
 
 if __name__ == "__main__":
     run_etl()

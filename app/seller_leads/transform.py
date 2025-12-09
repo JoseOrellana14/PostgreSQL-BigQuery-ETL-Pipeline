@@ -69,7 +69,7 @@ def transform_seller_leads(seller_leads_table, load_date):
 
 
         # Explicityly convert date fields to pandas datetime
-        date_fields = ['created_at', 'updated_at']
+        date_fields = ['created_at', 'updated_at', 'load_date']
         for field in date_fields:
             if field in seller_leads_df.columns:
                 seller_leads_df[field] = pd.to_datetime(seller_leads_df[field], errors='coerce')
