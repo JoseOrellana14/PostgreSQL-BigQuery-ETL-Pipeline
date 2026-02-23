@@ -9,6 +9,35 @@ from logging_config import setup_logging
 setup_logging()
 logger = logging.getLogger(__name__)
 
+
+def validate_money_field(value, field_name):
+    """Validate money fields to ensure they have reasonable values for Bolivia."""
+    if pd.isna(value):
+        return None
+        
+    try:
+        # Convert to float
+        value = float(value)
+        
+        # Define reasonable limits (in USD)
+        limits = {
+            'sale_price': 100000000,  # 100 million for property price
+            'commission_amount': 5000000  # 5 million for commission
+        }
+        
+        # Get the limit for this field
+        limit = limits.get(field_name, 1000000)  # Default to 1M if field not in limits
+        
+        # If value is negative or exceeds limit, return None
+        if value < 0 or value > limit:
+            return None
+            
+        return value
+        
+    except (ValueError, TypeError):
+        return None
+    
+
 def transform_property_sales(property_sales_table, load_date):
     """Transform property sales data and convert to a clean DataFrame"""
     try:
@@ -42,6 +71,17 @@ def transform_property_sales(property_sales_table, load_date):
         for field in date_fields:
             if field in property_sales_df.columns:
                 property_sales_df[field] = pd.to_datetime(property_sales_df[field], errors='coerce')
+
+        # Validate money-related fields
+        money_fields = [
+            'sale_price',
+            'commission_amount'
+        ]
+        
+        for field in money_fields:
+            if field in property_sales_df.columns:
+                property_sales_df[field] = property_sales_df[field].apply(lambda x: validate_money_field(x, field))
+
 
         # Final column filtering and type enforcement according to the schema
         final_petl_table = etl.fromdataframe(property_sales_df)

@@ -23,6 +23,7 @@ def extract_property_units(last_loaded=None):
         bedrooms,
         area_sqm,
         price,
+        price_per_sqm,
         currency,
         operation_type,
         listing_status,

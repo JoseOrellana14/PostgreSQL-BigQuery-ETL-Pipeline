@@ -9,6 +9,34 @@ from logging_config import setup_logging
 setup_logging()
 logger = logging.getLogger(__name__)
 
+def validate_money_field(value, field_name):
+    """Validate money fields to ensure they have reasonable values for Bolivia."""
+    if pd.isna(value):
+        return None
+        
+    try:
+        # Convert to float
+        value = float(value)
+        
+        # Define reasonable limits (in USD)
+        limits = {
+            'area_sqm': 10000000,  # 10 million sqm for area (acres)
+            'price': 100000000,  # 100 million for property price
+            'price_per_sqm': 50000  # 50,000 per sqm
+        }
+        
+        # Get the limit for this field
+        limit = limits.get(field_name, 1000000)  # Default to 1M if field not in limits
+        
+        # If value is negative or exceeds limit, return None
+        if value < 0 or value > limit:
+            return None
+            
+        return value
+        
+    except (ValueError, TypeError):
+        return None
+
 def transform_property_units(property_units_table, load_date):
     """Transform property units data and convert to a clean DataFrame"""
     try:
@@ -42,6 +70,17 @@ def transform_property_units(property_units_table, load_date):
         for field in date_fields:
             if field in property_units_df.columns:
                 property_units_df[field] = pd.to_datetime(property_units_df[field], errors='coerce')
+
+        # Validate money-related fields
+        money_fields = [
+            'area_sqm',
+            'price',
+            'price_per_sqm'
+        ]
+        
+        for field in money_fields:
+            if field in property_units_df.columns:
+                property_units_df[field] = property_units_df[field].apply(lambda x: validate_money_field(x, field))
 
         # Final column filtering and type enforcement according to the schema
         final_petl_table = etl.fromdataframe(property_units_df)

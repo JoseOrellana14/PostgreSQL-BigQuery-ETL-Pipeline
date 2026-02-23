@@ -9,6 +9,34 @@ from logging_config import setup_logging
 setup_logging()
 logger = logging.getLogger(__name__)
 
+
+def validate_money_field(value, field_name):
+    """Validate money fields to ensure they have reasonable values for Bolivia."""
+    if pd.isna(value):
+        return None
+        
+    try:
+        # Convert to float
+        value = float(value)
+        
+        # Define reasonable limits (in USD)
+        limits = {
+            'seller_price': 100000000  # 100 million for property price
+        }
+        
+        # Get the limit for this field
+        limit = limits.get(field_name, 1000000)  # Default to 1M if field not in limits
+        
+        # If value is negative or exceeds limit, return None
+        if value < 0 or value > limit:
+            return None
+            
+        return value
+        
+    except (ValueError, TypeError):
+        return None
+    
+
 def transform_seller_leads(seller_leads_table, load_date):
     """Transform seller leads data and convert to a clean DataFrame"""
     try:
@@ -73,6 +101,16 @@ def transform_seller_leads(seller_leads_table, load_date):
         for field in date_fields:
             if field in seller_leads_df.columns:
                 seller_leads_df[field] = pd.to_datetime(seller_leads_df[field], errors='coerce')
+
+        # Validate money-related fields
+        money_fields = [
+            'seller_price'
+        ]
+        
+        for field in money_fields:
+            if field in seller_leads_df.columns:
+                seller_leads_df[field] = seller_leads_df[field].apply(lambda x: validate_money_field(x, field))
+
 
         # Final column filtering and type enforcement according to the schema
         final_petl_table = etl.fromdataframe(seller_leads_df)

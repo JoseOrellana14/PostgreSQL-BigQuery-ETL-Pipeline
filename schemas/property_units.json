@@ -46,6 +46,11 @@
     },
     {
         "mode": "NULLABLE",
+        "name": "price_per_sqm",
+        "type": "FLAOT"
+    },
+    {
+        "mode": "NULLABLE",
         "name": "currency",
         "type": "STRING"
     },

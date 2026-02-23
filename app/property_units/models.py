@@ -14,6 +14,7 @@ class Property_Unit:
     bedrooms: Optional[int] = None
     area_sqm: Optional[float] = None
     price: Optional[float] = None
+    price_per_sqm: Optional[float] = None
     currency: Optional[str] = None
     operation_type: Optional[str] = None
     listing_status: Optional[str] = None
