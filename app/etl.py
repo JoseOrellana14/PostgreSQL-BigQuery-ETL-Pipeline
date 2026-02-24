@@ -14,7 +14,7 @@ def run_etl():
     print(f"[DEBUG] load_date generated (Bolivian Zone): {load_date}")
 
     """Defining the ETL"""
-    DATASET = "prod_dw"
+    DATASET = "capital_solutions_real_state"
 
     # =================
     # Organizations ETL
@@ -193,7 +193,7 @@ def run_etl():
     print("Extracting listing projects data...")
     listing_projects = extract_listing_projects(last_loaded_listing_projects)
     print(f"Extracted listing projects data.")
-    
+
     print("Transforming listing projects data...")
     listing_projects_df = transform_listing_projects(listing_projects, load_date)
     print(f"Transformed listing projects data.")
