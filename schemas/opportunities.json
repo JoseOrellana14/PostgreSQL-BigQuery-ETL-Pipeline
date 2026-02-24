@@ -1,0 +1,70 @@
+[
+  { "mode": "REQUIRED", "name": "opportunity_id", "type": "INTEGER" },
+  { "mode": "REQUIRED", "name": "user_id", "type": "INTEGER" },
+  { "mode": "REQUIRED", "name": "lead_id", "type": "INTEGER" },
+
+  { "mode": "NULLABLE", "name": "listing_id", "type": "INTEGER" },
+  { "mode": "NULLABLE", "name": "listing_project_id", "type": "INTEGER" },
+
+  { "mode": "NULLABLE", "name": "lead_role", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "lead_name", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "property_name", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "operation_type", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "property_type", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "property_regime", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "neighborhood_macro", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "neighborhood", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "bedrooms", "type": "INTEGER" },
+  { "mode": "NULLABLE", "name": "bathrooms", "type": "INTEGER" },
+
+  { "mode": "NULLABLE", "name": "area_aqm", "type": "FLOAT" },
+
+  { "mode": "REPEATED", "name": "amenities", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "budget", "type": "FLOAT" },
+  { "mode": "NULLABLE", "name": "target_currency", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "counter_price", "type": "FLOAT" },
+  { "mode": "NULLABLE", "name": "counter_price_at", "type": "TIMESTAMP" },
+
+  { "mode": "NULLABLE", "name": "final_price", "type": "FLOAT" },
+  { "mode": "NULLABLE", "name": "final_price_at", "type": "TIMESTAMP" },
+
+  { "mode": "NULLABLE", "name": "price_sqm", "type": "FLOAT" },
+
+  { "mode": "NULLABLE", "name": "qualitative_description", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "additional_criteria", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "financing_available", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "counterparty_preference", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "stage", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "next_appointment", "type": "TIMESTAMP" },
+  { "mode": "NULLABLE", "name": "channel_appointment", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "source_appointment", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "showup_last_appointment", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "qualitative_interest", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "opportunity_scoring", "type": "FLOAT" },
+
+  { "mode": "NULLABLE", "name": "primary_motive", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "timeframe", "type": "INTEGER" },
+  { "mode": "NULLABLE", "name": "price_flexibility", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "personal_notes", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "created_at", "type": "TIMESTAMP" },
+  { "mode": "NULLABLE", "name": "updated_at", "type": "TIMESTAMP" },
+
+  { "mode": "NULLABLE", "name": "notion_record_created_by", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "internal_record_created_by", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "notion_record_deleted_at", "type": "TIMESTAMP" },
+  { "mode": "NULLABLE", "name": "notion_record_status", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "floor_level", "type": "INTEGER" },
+  { "mode": "NULLABLE", "name": "last_opportunity", "type": "BOOLEAN" }
+]

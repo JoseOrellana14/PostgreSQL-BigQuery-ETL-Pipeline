@@ -3,7 +3,7 @@ import pandas as pd
 import json
 import logging
 from app.common.utils import preview_table, convert_column_types, load_schema
-from app.property_units.models import PROPERTY_UNIT_SCHEMA_PATH
+from app.listings.models import LISTING_SCHEMA_PATH, LISTING_SCHEMA_PATH
 from logging_config import setup_logging
 
 setup_logging()
@@ -22,7 +22,7 @@ def validate_money_field(value, field_name):
         limits = {
             'area_sqm': 10000000,  # 10 million sqm for area (acres)
             'price': 100000000,  # 100 million for property price
-            'price_per_sqm': 50000  # 50,000 per sqm
+            'price_sqm': 50000  # 50,000 per sqm
         }
         
         # Get the limit for this field
@@ -37,53 +37,52 @@ def validate_money_field(value, field_name):
     except (ValueError, TypeError):
         return None
 
-def transform_property_units(property_units_table, load_date):
-    """Transform property units data and convert to a clean DataFrame"""
+def transform_listings(listings_table, load_date):
+    """Transform listings data and convert to a clean DataFrame"""
     try:
         # Load the schema
-        schema = load_schema(PROPERTY_UNIT_SCHEMA_PATH)
-
+        schema = load_schema(LISTING_SCHEMA_PATH)
         # Preview the input table
-        preview_table(property_units_table, message="Input property units table:")
+        preview_table(listings_table, message="Input listings table:")
 
         # Conver column types based on the schema
-        property_units_table = convert_column_types(property_units_table, schema)
+        listings_table = convert_column_types(listings_table, schema)
 
         # Convert PETL table to pandas DataFrame
-        property_units_df = etl.todataframe(property_units_table)
+        listings_df = etl.todataframe(listings_table)
 
         # Mandatory Keys
-        mandatory_keys = ['property_unit_id', 'organization_id', 'user_id', 'seller_lead_id']
+        mandatory_keys = ['listing_id', 'user_id']
         for key in mandatory_keys:
-            if key in property_units_df.columns:
-                property_units_df[key] = pd.to_numeric(property_units_df[key], errors='coerce')
-        property_units_df = property_units_df.dropna(subset=mandatory_keys)
+            if key in listings_df.columns:
+                listings_df[key] = pd.to_numeric(listings_df[key], errors='coerce')
+        listings_df = listings_df.dropna(subset=mandatory_keys)
         for key in mandatory_keys:
-            if key in property_units_df.columns:
-                property_units_df[key] = property_units_df[key].astype('int64')
+            if key in listings_df.columns:
+                listings_df[key] = listings_df[key].astype('int64')
 
         # Getting the table's load date
-        property_units_df['load_date'] = load_date
+        listings_df['load_date'] = load_date
 
         # Explicityly convert date fields to pandas datetime
-        date_fields = ['created_at', 'updated_at', 'load_date']
+        date_fields = ['record_created_at', 'record_updated_at', 'record_deleted_at', 'load_date']
         for field in date_fields:
-            if field in property_units_df.columns:
-                property_units_df[field] = pd.to_datetime(property_units_df[field], errors='coerce')
+            if field in listings_df.columns:
+                listings_df[field] = pd.to_datetime(listings_df[field], errors='coerce')
 
         # Validate money-related fields
         money_fields = [
             'area_sqm',
             'price',
-            'price_per_sqm'
+            'price_sqm'
         ]
         
         for field in money_fields:
-            if field in property_units_df.columns:
-                property_units_df[field] = property_units_df[field].apply(lambda x: validate_money_field(x, field))
+            if field in listings_df.columns:
+                listings_df[field] = listings_df[field].apply(lambda x: validate_money_field(x, field))
 
         # Final column filtering and type enforcement according to the schema
-        final_petl_table = etl.fromdataframe(property_units_df)
+        final_petl_table = etl.fromdataframe(listings_df)
         schema_columns = [field['name'] for field in schema]
         final_petl_table = etl.cut(final_petl_table, *schema_columns)
         final_petl_table = convert_column_types(final_petl_table, schema)
@@ -96,5 +95,5 @@ def transform_property_units(property_units_table, load_date):
         return result
     
     except Exception:
-        logger.exception("Error transforming property units data")
+        logger.exception("Error transforming listings data")
         raise

@@ -6,24 +6,26 @@ from typing import Optional, List, Dict, Any
 class Appointment:
     """Appointment data model."""
     appointment_id: int
-    organization_id: int
     user_id: int
-    buyer_lead_id: int
-    seller_lead_id: int
-    property_opportunity_id: int
-    property_unit_id: int
-    scheduled_start_at: Optional[datetime] = None
-    scheduled_end_at: Optional[datetime] = None
-    status: Optional[str] = None
-    channel: Optional[str] = None
-    created_source: Optional[str] = None
-    cancel_reason: Optional[str] = None
-    notes: Optional[str] = None
-    state: Optional[int] = None
+    listing_id: Optional[int] = None
+    lead_id: Optional[int] = None
+    opportunity_id: Optional[int] = None
+    gcal_event_id: Optional[str] = None
+    start_at: Optional[datetime] = None
+    end_at: Optional[datetime] = None
+    modality: Optional[str] = None
+    showup: Optional[bool] = None
+    record_status: Optional[str] = None
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
     created_by: Optional[str] = None
     updated_by: Optional[str] = None
+    status: Optional[str] = None
+    remind_at: Optional[datetime] = None
+    reminder_sent_at: Optional[datetime] = None
+    summary: Optional[str] = None
+    post_followup_at: Optional[datetime] = None
+    post_followup_sent_at: Optional[datetime] = None
     
 
     @classmethod
@@ -39,4 +41,4 @@ class Appointment:
 APPOINTMENT_SCHEMA_PATH = 'schemas/appointments.json'
 
 # Table names
-APPOINTMENT_TABLE_NAME = 'appointments'
+APPOINTMENT_TABLE_NAME = 'raw_appointments'

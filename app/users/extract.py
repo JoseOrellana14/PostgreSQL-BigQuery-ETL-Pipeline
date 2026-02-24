@@ -14,7 +14,7 @@ def extract_users(last_loaded=None):
     #Define the SQL query to extract users
     query = f"""
     SELECT
-        id as user_id,
+        user_id,
         organization_id,
         name,
         last_name,

@@ -37,7 +37,7 @@ def transform_organizations(organizations_table, load_date):
         organizations_df['load_date'] = load_date
 
         # Explicityly convert date fields to pandas datetime
-        date_fields = ['created_at', 'updated_at', 'load_date']
+        date_fields = ['record_created_at', 'record_updated_at', 'load_date']
         for field in date_fields:
             if field in organizations_df.columns:
                 organizations_df[field] = pd.to_datetime(organizations_df[field], errors='coerce')

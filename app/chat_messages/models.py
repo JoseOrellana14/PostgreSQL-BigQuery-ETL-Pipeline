@@ -6,26 +6,30 @@ from typing import Optional, List, Dict, Any
 class Chat_Message:
     """Chat Message data model."""
     chat_message_id: int
-    organization_id: int
-    sender_phone: Optional[str] = None
-    reciever_phone: Optional[str] = None
-    user_id: Optional[int] = None
-    buyer_lead_id: Optional[int] = None
-    seller_lead_id: Optional[int] = None
-    property_opportunity_id: Optional[int] = None
-    channel: Optional[str] = None
-    direction: Optional[str] = None
-    sent_at: Optional[datetime] = None
-    delivered_at: Optional[datetime] = None
-    read_at: Optional[datetime] = None
-    has_media: Optional[bool] = None
-    body: Optional[str] = None
-    char_count: Optional[int] = None
-    state: Optional[int] = None
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
-    created_by: Optional[str] = None
-    updated_by: Optional[str] = None
+    lead_id: int
+    user_id: int
+    session_id: Optional[int] = None
+    telegram_chat_id: Optional[int] = None
+    content: Optional[str] = None
+    emisor: Optional[str] = None
+    receptor: Optional[str] = None
+    registro_creado_el: Optional[datetime] = None
+    mensaje_enviado_el: Optional[datetime] = None
+    tipo_emisor: Optional[str] = None
+    estatus: Optional[str] = None
+    tipo_mensaje: Optional[str] = None
+    api_url: Optional[str] = None
+    chat_id: Optional[str] = None
+    wamid: Optional[str] = None
+    filename: Optional[str] = None
+    file_mime_type: Optional[str] = None
+    file_extension: Optional[str] = None
+    file_summary: Optional[str] = None
+    file_keywords: Optional[str] = None
+    file_character_length: Optional[int] = None
+    plataforma_origen: Optional[str] = None
+    registro_actualizado_el: Optional[datetime] = None
+
 
 
     @classmethod
@@ -41,4 +45,4 @@ class Chat_Message:
 CHAT_MESSAGE_SCHEMA_PATH = 'schemas/chat_messages.json'
 
 # Table names
-CHAT_MESSAGE_TABLE_NAME = 'chat_messages'
+CHAT_MESSAGE_TABLE_NAME = 'raw_chat_messages'

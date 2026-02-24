@@ -25,7 +25,7 @@ def transform_chat_messages(chat_messages_table, load_date):
         chat_messages_df = etl.todataframe(chat_messages_table)
 
         # Mandatory Keys
-        mandatory_keys = ['chat_message_id', 'organization_id', 'user_id', 'buyer_lead_id', 'seller_lead_id', 'property_opportunity_id']
+        mandatory_keys = ['chat_message_id', 'lead_id', 'user_id']
         for key in mandatory_keys:
             if key in chat_messages_df.columns:
                 chat_messages_df[key] = pd.to_numeric(chat_messages_df[key], errors='coerce')
@@ -38,7 +38,7 @@ def transform_chat_messages(chat_messages_table, load_date):
         chat_messages_df['load_date'] = load_date
 
         # Explicityly convert date fields to pandas datetime
-        date_fields = ['created_at', 'updated_at', 'load_date']
+        date_fields = ['registro_creado_el', 'registro_actualizado_el', 'mensaje_enviado_el', 'load_date']
         for field in date_fields:
             if field in chat_messages_df.columns:
                 chat_messages_df[field] = pd.to_datetime(chat_messages_df[field], errors='coerce')

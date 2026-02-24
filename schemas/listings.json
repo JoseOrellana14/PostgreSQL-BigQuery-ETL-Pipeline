@@ -1,0 +1,69 @@
+[
+  { "mode": "REQUIRED", "name": "listing_id", "type": "INTEGER" },
+  { "mode": "REQUIRED", "name": "user_id", "type": "INTEGER" },
+
+  { "mode": "NULLABLE", "name": "listing_project_id", "type": "INTEGER" },
+
+  { "mode": "NULLABLE", "name": "operation_type", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "property_type", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "property_regime", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "neighborhood", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "neighborhood_macro", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "bedrooms", "type": "INTEGER" },
+  { "mode": "NULLABLE", "name": "bathrooms", "type": "INTEGER" },
+
+  { "mode": "NULLABLE", "name": "area_sqm", "type": "FLOAT" },
+
+  { "mode": "NULLABLE", "name": "amenities", "type": "JSON" },
+
+  { "mode": "NULLABLE", "name": "price", "type": "FLOAT" },
+  { "mode": "NULLABLE", "name": "target_currency", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "price_sqm", "type": "FLOAT" },
+
+  { "mode": "NULLABLE", "name": "qualitative_description", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "record_status", "type": "INTEGER" },
+  { "mode": "NULLABLE", "name": "record_created_at", "type": "TIMESTAMP" },
+  { "mode": "NULLABLE", "name": "record_deleted_at", "type": "TIMESTAMP" },
+  { "mode": "NULLABLE", "name": "record_updated_at", "type": "TIMESTAMP" },
+  { "mode": "NULLABLE", "name": "record_created_by", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "record_updated_by", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "name", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "collection_method", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "promoted_opportunity_id", "type": "INTEGER" },
+
+  { "mode": "NULLABLE", "name": "estado", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "floor_level", "type": "INTEGER" },
+  { "mode": "NULLABLE", "name": "floor_level_tag", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "floors_count", "type": "INTEGER" },
+
+  { "mode": "NULLABLE", "name": "address", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "visibility", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "location_reference_raw", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "main_road", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "intersecting_road", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "anillo_min", "type": "INTEGER" },
+  { "mode": "NULLABLE", "name": "anillo_max", "type": "INTEGER" },
+
+  { "mode": "NULLABLE", "name": "lat", "type": "FLOAT" },
+  { "mode": "NULLABLE", "name": "lng", "type": "FLOAT" },
+
+  { "mode": "NULLABLE", "name": "google_maps_link", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "owner_name", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "personal_notes", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "brochure_name", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "url_brochure", "type": "JSON" },
+  { "mode": "NULLABLE", "name": "notion_brochure_key", "type": "JSON" },
+
+  { "mode": "NULLABLE", "name": "photo_name", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "url_photo", "type": "JSON" },
+  { "mode": "NULLABLE", "name": "notion_photo_key", "type": "JSON" }
+]

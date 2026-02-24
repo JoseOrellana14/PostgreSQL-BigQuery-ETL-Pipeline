@@ -3,7 +3,7 @@ import pandas as pd
 import json
 import logging
 from app.common.utils import preview_table, convert_column_types, load_schema
-from app.property_opportunities.models import PROPERTY_OPPORTUNITY_SCHEMA_PATH
+from app.opportunities.models import OPPORTUNITY_SCHEMA_PATH
 from logging_config import setup_logging
 
 setup_logging()
@@ -21,9 +21,9 @@ def validate_money_field(value, field_name):
         
         # Define reasonable limits (in USD)
         limits = {
-            'initial_price': 100000000,  # 100 million for property price
-            'offer_price_buyer': 100000000,  # 100 million for property price
-            'counter_price_seller': 100000000  # 100 million for property price
+            'budget': 100000000,  # 100 million for property price
+            'counter_price': 100000000,  # 100 million for property price
+            'final_price': 100000000  # 100 million for property price
         }
         
         # Get the limit for this field
@@ -39,54 +39,53 @@ def validate_money_field(value, field_name):
         return None
     
 
-def transform_property_opportunities(property_opportunities_table, load_date):
-    """Transform property opportunities data and convert to a clean DataFrame"""
+def transform_opportunities(opportunities_table, load_date):
+    """Transform opportunities data and convert to a clean DataFrame"""
     try:
         # Load the schema
-        schema = load_schema(PROPERTY_OPPORTUNITY_SCHEMA_PATH)
-
+        schema = load_schema(OPPORTUNITY_SCHEMA_PATH)
         # Preview the input table
-        preview_table(property_opportunities_table, message="Input property opportunities table:")
+        preview_table(opportunities_table, message="Input opportunities table:")
 
         # Conver column types based on the schema
-        property_opportunities_table = convert_column_types(property_opportunities_table, schema)
+        opportunities_table = convert_column_types(opportunities_table, schema)
 
         # Convert PETL table to pandas DataFrame
-        property_opportunities_df = etl.todataframe(property_opportunities_table)
+        opportunities_df = etl.todataframe(opportunities_table)
 
         # Mandatory Keys
-        mandatory_keys = ['property_opportunity_id', 'organization_id', 'user_id', 'buyer_lead_id', 'property_unit_id']
+        mandatory_keys = ['opportunity_id', 'user_id', 'lead_id']
         for key in mandatory_keys:
-            if key in property_opportunities_df.columns:
-                property_opportunities_df[key] = pd.to_numeric(property_opportunities_df[key], errors='coerce')
-        property_opportunities_df = property_opportunities_df.dropna(subset=mandatory_keys)
+            if key in opportunities_df.columns:
+                opportunities_df[key] = pd.to_numeric(opportunities_df[key], errors='coerce')
+        opportunities_df = opportunities_df.dropna(subset=mandatory_keys)
         for key in mandatory_keys:
-            if key in property_opportunities_df.columns:
-                property_opportunities_df[key] = property_opportunities_df[key].astype('int64')
+            if key in opportunities_df.columns:
+                opportunities_df[key] = opportunities_df[key].astype('int64')
 
         # Getting the table's load date
-        property_opportunities_df['load_date'] = load_date
+        opportunities_df['load_date'] = load_date
 
         # Explicityly convert date fields to pandas datetime
         date_fields = ['created_at', 'updated_at', 'load_date']
         for field in date_fields:
-            if field in property_opportunities_df.columns:
-                property_opportunities_df[field] = pd.to_datetime(property_opportunities_df[field], errors='coerce')
+            if field in opportunities_df.columns:
+                opportunities_df[field] = pd.to_datetime(opportunities_df[field], errors='coerce')
 
         # Validate money-related fields
         money_fields = [
-            'initial_price',
-            'offer_price_buyer',
-            'counter_price_seller'
+            'budget',
+            'counter_price',
+            'final_price'
         ]
         
         for field in money_fields:
-            if field in property_opportunities_df.columns:
-                property_opportunities_df[field] = property_opportunities_df[field].apply(lambda x: validate_money_field(x, field))
+            if field in opportunities_df.columns:
+                opportunities_df[field] = opportunities_df[field].apply(lambda x: validate_money_field(x, field))
 
 
         # Final column filtering and type enforcement according to the schema
-        final_petl_table = etl.fromdataframe(property_opportunities_df)
+        final_petl_table = etl.fromdataframe(opportunities_df)
         schema_columns = [field['name'] for field in schema]
         final_petl_table = etl.cut(final_petl_table, *schema_columns)
         final_petl_table = convert_column_types(final_petl_table, schema)

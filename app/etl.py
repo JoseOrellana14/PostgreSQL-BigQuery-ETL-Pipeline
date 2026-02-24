@@ -2,8 +2,8 @@ from app.organizations import extract_organizations, transform_organizations, lo
 from app.users import extract_users, transform_users, USER_SCHEMA_PATH
 from app.buyer_leads import extract_buyer_leads, transform_buyer_leads, BUYER_LEAD_SCHEMA_PATH
 from app.seller_leads import extract_seller_leads, transform_seller_leads, SELLER_LEAD_SCHEMA_PATH
-from app.property_units import extract_property_units, transform_property_units, PROPERTY_UNIT_SCHEMA_PATH
-from app.property_opportunities import extract_property_opportunities, transform_property_opportunities, PROPERTY_OPPORTUNITY_SCHEMA_PATH
+from app.listings import extract_property_units, transform_property_units, PROPERTY_UNIT_SCHEMA_PATH
+from app.opportunities import extract_property_opportunities, transform_property_opportunities, PROPERTY_OPPORTUNITY_SCHEMA_PATH
 from app.property_sales import extract_property_sales, transform_property_sales, PROPERTY_SALE_SCHEMA_PATH
 from app.chat_messages import extract_chat_messages, transform_chat_messages, CHAT_MESSAGE_SCHEMA_PATH
 from app.appointments import extract_appointments, transform_appointments, APPOINTMENT_SCHEMA_PATH

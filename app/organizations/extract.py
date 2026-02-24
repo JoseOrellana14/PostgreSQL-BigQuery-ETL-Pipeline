@@ -18,12 +18,12 @@ def extract_organizations(last_loaded=None):
         legal_name,
         commercial_name,
         chatbot_enabled_default,
-        status,
-        state,
-        created_at,
-        updated_at,
-        created_by,
-        updated_by
+        contractor_status,
+        record_created_at,
+        record_updated_at,
+        record_created_by,
+        updated_by,
+        contractor
     FROM public.organizations
     """
 
@@ -31,12 +31,12 @@ def extract_organizations(last_loaded=None):
     if last_loaded:
         query += f"""
         WHERE (
-            created_at > '{last_loaded}'
-            OR updated_at > '{last_loaded}'
+            record_created_at > '{last_loaded}'
+            OR record_updated_at > '{last_loaded}'
         )
         """
     else:
-        query += " WHERE created_at IS NOT NULL"
+        query += " WHERE record_created_at IS NOT NULL"
 
     try:
         # Use a context manager to handle the database connection

@@ -15,24 +15,26 @@ def extract_appointments(last_loaded=None):
     query = f"""
     SELECT
         id as appointment_id,
-        organization_id,
         user_id,
-        buyer_lead_id,
-        seller_lead_id,
-        property_opportunity_id,
-        property_unit_id,
-        scheduled_start_at,
-        scheduled_end_at,
-        status,
-        channel,
-        created_source,
-        cancel_reason,
-        notes,
-        state,
+        listing_id,
+        lead_id,
+        opportunity_id,
+        gcal_event_id,
+        start_at,
+        end_at,
+        modality,
+        showup,
+        record_status,
         created_at,
         updated_at,
         created_by,
-        updated_by
+        updated_by,
+        status,
+        remind_at,
+        reminder_sent_at,
+        summary,
+        post_followup_at,
+        post_followup_sent_at
     FROM public.appointments
     """
 

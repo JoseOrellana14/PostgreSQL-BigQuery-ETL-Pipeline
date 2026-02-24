@@ -1,112 +1,33 @@
 [
-    {
-        "mode": "REQUIRED",
-        "name": "chat_message_id",
-        "type": "INTEGER"
-    },
-    {
-        "mode": "REQUIRED",
-        "name": "organization_id",
-        "type": "INTEGER"
-    },
-    {
-        "mode": "REQUIRED",
-        "name": "sender_phone",
-        "type": "STRING"
-    },
-    {
-        "mode": "REQUIRED",
-        "name": "reciever_phone",
-        "type": "STRING"
-    },
-    {
-        "mode": "NULLABLE",
-        "name": "user_id",
-        "type": "INTEGER"
-    },
-    {
-        "mode": "NULLABLE",
-        "name": "buyer_lead_id",
-        "type": "INTEGER"
-    },
-    {
-        "mode": "NULLABLE",
-        "name": "seller_lead_id",
-        "type": "INTEGER"
-    },
-    {
-        "mode": "NULLABLE",
-        "name": "property_opportunity_id",
-        "type": "INTEGER"
-    },
-    {
-        "mode": "NULLABLE",
-        "name": "channel",
-        "type": "STRING"
-    },
-    {
-        "mode": "NULLABLE",
-        "name": "direction",
-        "type": "STRING"
-    },
-    {
-        "mode": "NULLABLE",
-        "name": "sent_at",
-        "type": "TIMESTAMP"
-    },
-    {
-        "mode": "NULLABLE",
-        "name": "delivered_at",
-        "type": "TIMESTAMP"
-    },
-    {
-        "mode": "NULLABLE",
-        "name": "read_at",
-        "type": "TIMESTAMP"
-    },
-    {
-        "mode": "NULLABLE",
-        "name": "has_media",
-        "type": "BOOLEAN"
-    },
-    {
-        "mode": "NULLABLE",
-        "name": "body",
-        "type": "STRING"
-    },
-    {
-        "mode": "NULLABLE",
-        "name": "char_count",
-        "type": "INTEGER"
-    },
-    {
-        "mode": "NULLABLE",
-        "name": "state",
-        "type": "INTEGER"
-    },
-    {
-        "mode": "NULLABLE",
-        "name": "created_at",
-        "type": "TIMESTAMP"
-    },
-    {
-        "mode": "NULLABLE",
-        "name": "updated_at",
-        "type": "TIMESTAMP"
-    },
-    {
-        "mode": "NULLABLE",
-        "name": "created_by",
-        "type": "STRING"
-    },
-    {
-        "mode": "NULLABLE",
-        "name": "updated_by",
-        "type": "STRING"
-    },
-    {
-        "mode": "NULLABLE",
-        "name": "load_date",
-        "type": "TIMESTAMP"
-    }
+  { "mode": "REQUIRED", "name": "chat_message_id", "type": "INTEGER" },
+  { "mode": "REQUIRED", "name": "lead_id", "type": "INTEGER" },
+  { "mode": "REQUIRED", "name": "user_id", "type": "INTEGER" },
+
+  { "mode": "NULLABLE", "name": "session_id", "type": "INTEGER" },
+  { "mode": "NULLABLE", "name": "telegram_chat_id", "type": "INTEGER" },
+
+  { "mode": "NULLABLE", "name": "content", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "emisor", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "receptor", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "registro_creado_el", "type": "TIMESTAMP" },
+  { "mode": "NULLABLE", "name": "mensaje_enviado_el", "type": "TIMESTAMP" },
+
+  { "mode": "NULLABLE", "name": "tipo_emisor", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "estatus", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "tipo_mensaje", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "api_url", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "chat_id", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "wamid", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "filename", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "file_mime_type", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "file_extension", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "file_summary", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "file_keywords", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "file_character_length", "type": "INTEGER" },
+
+  { "mode": "NULLABLE", "name": "plataforma_origen", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "registro_actualizado_el", "type": "TIMESTAMP" }
 ]

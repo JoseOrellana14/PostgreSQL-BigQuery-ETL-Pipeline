@@ -15,26 +15,29 @@ def extract_chat_messages(last_loaded=None):
     query = f"""
     SELECT
         id as chat_message_id,
-        organization_id,
-        sender_phone,
-        reciever_phone,
+        lead_id,
         user_id,
-        buyer_lead_id,
-        seller_lead_id,
-        property_opportunity_id,
-        channel,
-        direction,
-        sent_at,
-        delivered_at,
-        read_at,
-        has_media,
-        body,
-        char_count,
-        state,
-        created_at,
-        updated_at,
-        created_by,
-        updated_by
+        session_id,
+        telegram_chat_id,
+        content,
+        emisor,
+        receptor,
+        registro_creado_el,
+        mensaje_enviado_el,
+        tipo_emisor,
+        estatus,
+        tipo_mensaje,
+        api_url,
+        chat_id,
+        wamid,
+        filename,
+        file_mime_type,
+        file_extension,
+        file_summary,
+        file_keywords,
+        file_character_length,
+        plataforma_origen,
+        registro_actualizado_el
     FROM public.chat_messages
     """
 
@@ -42,12 +45,12 @@ def extract_chat_messages(last_loaded=None):
     if last_loaded:
         query += f"""
         WHERE (
-            created_at > '{last_loaded}'
-            OR updated_at > '{last_loaded}'
+            registro_creado_el > '{last_loaded}'
+            OR registro_actualizado_el > '{last_loaded}'
         )
         """
     else:
-        query += " WHERE created_at IS NOT NULL"
+        query += " WHERE registro_creado_el IS NOT NULL"
 
     try:
         # Use a context manager to handle the database connection
