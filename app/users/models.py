@@ -34,4 +34,4 @@ class User:
 USER_SCHEMA_PATH = 'schemas/users.json'
 
 # Table names
-USER_TABLE_NAME = 'users'
+USER_TABLE_NAME = 'raw_users'

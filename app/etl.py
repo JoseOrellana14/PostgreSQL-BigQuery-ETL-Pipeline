@@ -1,12 +1,11 @@
 from app.organizations import extract_organizations, transform_organizations, load_organizations, ORGANIZATION_SCHEMA_PATH
 from app.users import extract_users, transform_users, USER_SCHEMA_PATH
-from app.buyer_leads import extract_buyer_leads, transform_buyer_leads, BUYER_LEAD_SCHEMA_PATH
-from app.seller_leads import extract_seller_leads, transform_seller_leads, SELLER_LEAD_SCHEMA_PATH
-from app.listings import extract_property_units, transform_property_units, PROPERTY_UNIT_SCHEMA_PATH
-from app.opportunities import extract_property_opportunities, transform_property_opportunities, PROPERTY_OPPORTUNITY_SCHEMA_PATH
-from app.property_sales import extract_property_sales, transform_property_sales, PROPERTY_SALE_SCHEMA_PATH
+from app.listings import extract_listings, transform_listings, LISTING_SCHEMA_PATH
+from app.opportunities import extract_opportunities, transform_opportunities, OPPORTUNITY_SCHEMA_PATH
 from app.chat_messages import extract_chat_messages, transform_chat_messages, CHAT_MESSAGE_SCHEMA_PATH
 from app.appointments import extract_appointments, transform_appointments, APPOINTMENT_SCHEMA_PATH
+from app.leads import extract_leads, transform_leads, LEAD_SCHEMA_PATH
+from app.listing_projects import extract_listing_projects, transform_listing_projects, LISTING_PROJECT_SCHEMA_PATH
 from app.common.utils import get_load_date, get_last_loaded_timestamp, load_dataframe_with_merge
 
 def run_etl():
@@ -20,7 +19,7 @@ def run_etl():
     # =================
     # Organizations ETL
     # =================
-    last_loaded_organizations = get_last_loaded_timestamp("organizations", dataset=DATASET)
+    last_loaded_organizations = get_last_loaded_timestamp("raw_organizations", dataset=DATASET)
     print(f"Last loaded organizations: {last_loaded_organizations}")
 
     print("Extracting organizations data...")
@@ -37,14 +36,14 @@ def run_etl():
     bq_table_env_var="BQ_ORGANIZATIONS_TABLE",
     schema_path=ORGANIZATION_SCHEMA_PATH,
     key_column="organization_id",
-    updated_at_col="updated_at",
+    updated_at_col="record_updated_at",
     )
     print("Organizations data loaded.")
 
     # =================
     # Users ETL
     # =================
-    last_loaded_users = get_last_loaded_timestamp("users", dataset=DATASET)
+    last_loaded_users = get_last_loaded_timestamp("raw_users", dataset=DATASET)
     print(f"Last loaded users: {last_loaded_users}")
 
     print("Extracting users data...")
@@ -66,129 +65,57 @@ def run_etl():
     print("Users data loaded.")
 
     # =================
-    # Buyer Leads ETL
+    # Listings ETL
     # =================
-    last_loaded_buyer_leads = get_last_loaded_timestamp("buyer_leads", dataset=DATASET)
-    print(f"Last loaded buyer leads: {last_loaded_buyer_leads}")
+    last_loaded_listings = get_last_loaded_timestamp("raw_listings", dataset=DATASET)
+    print(f"Last loaded listings: {last_loaded_listings}")
 
-    print("Extracting buyer leads data...")
-    buyer_leads = extract_buyer_leads(last_loaded_buyer_leads)
-    print(f"Extracted buyer leads data.")
+    print("Extracting listings data...")
+    listings = extract_listings(last_loaded_listings)
+    print(f"Extracted listings data.")
 
-    print("Transforming buyer leads data...")
-    buyer_leads_df = transform_buyer_leads(buyer_leads, load_date)
-    print(f"Transformed buyer leads data.")
+    print("Transforming listings data...")
+    listings_df = transform_listings(listings, load_date)
+    print(f"Transformed listings data.")
 
-    print("Loading buyer leads data into BigQuery...")
+    print("Loading listings data into BigQuery...")
     load_dataframe_with_merge(
-    df=buyer_leads_df,
-    bq_table_env_var="BQ_BUYER_LEADS_TABLE",
-    schema_path=BUYER_LEAD_SCHEMA_PATH,
-    key_column="buyer_lead_id",
+    df=listings_df,
+    bq_table_env_var="BQ_LISTINGS_TABLE",
+    schema_path=LISTING_SCHEMA_PATH,
+    key_column="listing_id",
+    updated_at_col="record_updated_at",
+    )
+    print("listings data loaded.")
+
+    # =================
+    # Opportunities ETL
+    # =================
+    last_loaded_opportunities = get_last_loaded_timestamp("raw_opportunities", dataset=DATASET)
+    print(f"Last loaded opportunities: {last_loaded_opportunities}")
+
+    print("Extracting opportunities data...")
+    opportunities = extract_opportunities(last_loaded_opportunities)
+    print(f"Extracted opportunities data.")
+
+    print("Transforming opportunities data...")
+    opportunities_df = transform_opportunities(opportunities, load_date)
+    print(f"Transformed opportunities data.")
+
+    print("Loading opportunities data into BigQuery...")
+    load_dataframe_with_merge(
+    df=opportunities_df,
+    bq_table_env_var="BQ_OPPORTUNITIES_TABLE",
+    schema_path=OPPORTUNITY_SCHEMA_PATH,
+    key_column="opportunity_id",
     updated_at_col="updated_at",
     )
-    print("buyer leads data loaded.")
-
-    # =================
-    # Seller Leads ETL
-    # =================
-    last_loaded_seller_leads = get_last_loaded_timestamp("seller_leads", dataset=DATASET)
-    print(f"Last loaded seller leads: {last_loaded_seller_leads}")
-
-    print("Extracting seller leads data...")
-    seller_leads = extract_seller_leads(last_loaded_seller_leads)
-    print(f"Extracted seller leads data.")
-
-    print("Transforming seller leads data...")
-    seller_leads_df = transform_seller_leads(seller_leads, load_date)
-    print(f"Transformed seller leads data.")
-
-    print("Loading seller leads data into BigQuery...")
-    load_dataframe_with_merge(
-    df=seller_leads_df,
-    bq_table_env_var="BQ_SELLER_LEADS_TABLE",
-    schema_path=SELLER_LEAD_SCHEMA_PATH,
-    key_column="seller_lead_id",
-    updated_at_col="updated_at",
-    )
-    print("seller leads data loaded.")
-
-    # =================
-    # Property Units ETL
-    # =================
-    last_loaded_property_units = get_last_loaded_timestamp("property_units", dataset=DATASET)
-    print(f"Last loaded property units: {last_loaded_property_units}")
-
-    print("Extracting property units data...")
-    property_units = extract_property_units(last_loaded_property_units)
-    print(f"Extracted property units data.")
-
-    print("Transforming property units data...")
-    property_units_df = transform_property_units(property_units, load_date)
-    print(f"Transformed property units data.")
-
-    print("Loading property units data into BigQuery...")
-    load_dataframe_with_merge(
-    df=property_units_df,
-    bq_table_env_var="BQ_PROPERTY_UNITS_TABLE",
-    schema_path=PROPERTY_UNIT_SCHEMA_PATH,
-    key_column="property_unit_id",
-    updated_at_col="updated_at",
-    )
-    print("property units data loaded.")
-
-    # =================
-    # Property Opportunities ETL
-    # =================
-    last_loaded_property_opportunities = get_last_loaded_timestamp("property_opportunities", dataset=DATASET)
-    print(f"Last loaded property opportunities: {last_loaded_property_opportunities}")
-
-    print("Extracting property opportunities data...")
-    property_opportunities = extract_property_opportunities(last_loaded_property_opportunities)
-    print(f"Extracted property opportunities data.")
-
-    print("Transforming property opportunities data...")
-    property_opportunities_df = transform_property_opportunities(property_opportunities, load_date)
-    print(f"Transformed property opportunities data.")
-
-    print("Loading property opportunities data into BigQuery...")
-    load_dataframe_with_merge(
-    df=property_opportunities_df,
-    bq_table_env_var="BQ_PROPERTY_OPPORTUNITIES_TABLE",
-    schema_path=PROPERTY_OPPORTUNITY_SCHEMA_PATH,
-    key_column="property_opportunity_id",
-    updated_at_col="updated_at",
-    )
-    print("property opportunities data loaded.")
-
-    # =================
-    # Property Sales ETL
-    # =================
-    last_loaded_property_sales = get_last_loaded_timestamp("property_sales", dataset=DATASET)
-    print(f"Last loaded property sales: {last_loaded_property_sales}")
-
-    print("Extracting property sales data...")
-    property_sales = extract_property_sales(last_loaded_property_sales)
-    print(f"Extracted property sales data.")
-
-    print("Transforming property sales data...")
-    property_sales_df = transform_property_sales(property_sales, load_date)
-    print(f"Transformed property sales data.")
-
-    print("Loading property sales data into BigQuery...")
-    load_dataframe_with_merge(
-    df=property_sales_df,
-    bq_table_env_var="BQ_PROPERTY_SALES_TABLE",
-    schema_path=PROPERTY_SALE_SCHEMA_PATH,
-    key_column="property_sale_id",
-    updated_at_col="updated_at",
-    )
-    print("property sales data loaded.")
+    print("opportunities data loaded.")
 
     # =================
     # Chat messages ETL
     # =================
-    last_loaded_chat_messages = get_last_loaded_timestamp("chat_messages", dataset=DATASET)
+    last_loaded_chat_messages = get_last_loaded_timestamp("raw_chat_messages", dataset=DATASET)
     print(f"Last loaded chat messages: {last_loaded_chat_messages}")
 
     print("Extracting chat messages data...")
@@ -205,14 +132,14 @@ def run_etl():
     bq_table_env_var="BQ_CHAT_MESSAGES_TABLE",
     schema_path=CHAT_MESSAGE_SCHEMA_PATH,
     key_column="chat_message_id",
-    updated_at_col="updated_at",
+    updated_at_col="registro_actualizado_el",
     )
     print("chat messages data loaded.")
 
     # =================
     # Appointments ETL
     # =================
-    last_loaded_appointments = get_last_loaded_timestamp("appointments", dataset=DATASET)
+    last_loaded_appointments = get_last_loaded_timestamp("raw_appointments", dataset=DATASET)
     print(f"Last loaded appointments: {last_loaded_appointments}")
 
     print("Extracting appointments data...")
@@ -233,6 +160,53 @@ def run_etl():
     )
     print("appointments data loaded.")
 
+    # =================
+    # Leads ETL
+    # =================
+    last_loaded_leads = get_last_loaded_timestamp("raw_leads", dataset=DATASET)
+    print(f"Last loaded leads: {last_loaded_leads}")
+
+    print("Extracting leads data...")
+    leads = extract_leads(last_loaded_leads)
+    print(f"Extracted leads data.")
+
+    print("Transforming leads data...")
+    leads_df = transform_leads(leads, load_date)
+    print(f"Transformed leads data.")
+
+    print("Loading leads data into BigQuery...")
+    load_dataframe_with_merge(
+    df=leads_df,
+    bq_table_env_var="BQ_LEADS_TABLE",
+    schema_path=LEAD_SCHEMA_PATH,
+    key_column="lead_id",
+    updated_at_col="updated_at",
+    )
+    print("leads data loaded.")
+
+    # =================
+    # Listing Projects ETL
+    # =================
+    last_loaded_listing_projects = get_last_loaded_timestamp("raw_listing_projects", dataset=DATASET)
+    print(f"Last loaded listing projects: {last_loaded_listing_projects}")
+
+    print("Extracting listing projects data...")
+    listing_projects = extract_listing_projects(last_loaded_listing_projects)
+    print(f"Extracted listing projects data.")
+    
+    print("Transforming listing projects data...")
+    listing_projects_df = transform_listing_projects(listing_projects, load_date)
+    print(f"Transformed listing projects data.")
+
+    print("Loading listing projects data into BigQuery...")
+    load_dataframe_with_merge(
+    df=listing_projects_df,
+    bq_table_env_var="BQ_LISTING_PROJECTS_TABLE",
+    schema_path=LISTING_PROJECT_SCHEMA_PATH,
+    key_column="listing_project_id",
+    updated_at_col="updated_at",
+    )
+    print("listing projects data loaded.")
 
 
 if __name__ == "__main__":

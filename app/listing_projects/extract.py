@@ -8,7 +8,7 @@ from logging_config import setup_logging
 setup_logging()
 logger = logging.getLogger(__name__)
 
-def extract_listings(last_loaded=None):
+def extract_listings_projects(last_loaded=None):
     """Extract property units data from PostgreSQL database using PETL"""
 
     #Define the SQL query to extract listings
