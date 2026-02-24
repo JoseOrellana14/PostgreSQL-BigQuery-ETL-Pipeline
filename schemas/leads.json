@@ -1,0 +1,47 @@
+[
+  { "mode": "REQUIRED", "name": "lead_id", "type": "INTEGER" },
+  { "mode": "REQUIRED", "name": "user_id", "type": "INTEGER" },
+
+  { "mode": "NULLABLE", "name": "related_lead_id", "type": "INTEGER" },
+
+  { "mode": "NULLABLE", "name": "prospecto_numero_whatsapp", "type": "INTEGER" },
+  { "mode": "NULLABLE", "name": "prospecto_nombre_whatsapp", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "bot_estado", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "plataforma_origen", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "prospecto_etapa", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "prospecto_interes_cuantitativo", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "proxima_cita_inicio", "type": "TIMESTAMP" },
+  { "mode": "NULLABLE", "name": "proxima_cita_fin", "type": "TIMESTAMP" },
+
+  { "mode": "NULLABLE", "name": "agente_notas_personales", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "primer_mensaje_recibido", "type": "TIMESTAMP" },
+  { "mode": "NULLABLE", "name": "ultimo_mensaje_recibido", "type": "TIMESTAMP" },
+
+  { "mode": "NULLABLE", "name": "prospecto_email", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "asistente_resumen", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "id_registro_notion", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "registro_creado_el", "type": "TIMESTAMP" },
+  { "mode": "NULLABLE", "name": "registro_ultima_actualizacion", "type": "TIMESTAMP" },
+
+  { "mode": "NULLABLE", "name": "prospecto_intencion_categoria", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "prospecto_urgencia", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "prospecto_perfil", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "prospecto_motivacion_categoria", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "registro_notion_estado", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "registro_notion_creado_por", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "registro_eliminado_el", "type": "TIMESTAMP" },
+
+  { "mode": "NULLABLE", "name": "prospecto_nombre_agendado", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "registro_interno_creado_por", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "ultimo_analisis_ia_at", "type": "TIMESTAMP" },
+  { "mode": "NULLABLE", "name": "last_agent_message_at", "type": "TIMESTAMP" }
+]

@@ -1,0 +1,45 @@
+[
+  { "mode": "REQUIRED", "name": "listing_project_id", "type": "INTEGER" },
+  { "mode": "REQUIRED", "name": "user_id", "type": "INTEGER" },
+
+  { "mode": "NULLABLE", "name": "name", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "developer", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "city", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "neighborhood", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "neighborhood_macro", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "project_type", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "project_status", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "delivery_date", "type": "TIMESTAMP" },
+  { "mode": "NULLABLE", "name": "total_units", "type": "INTEGER" },
+
+  { "mode": "NULLABLE", "name": "description", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "record_status", "type": "INTEGER" },
+  { "mode": "NULLABLE", "name": "record_created_at", "type": "TIMESTAMP" },
+  { "mode": "NULLABLE", "name": "record_updated_at", "type": "TIMESTAMP" },
+  { "mode": "NULLABLE", "name": "record_deleted_at", "type": "TIMESTAMP" },
+  { "mode": "NULLABLE", "name": "record_created_by", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "record_updated_by", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "floors_count", "type": "INTEGER" },
+  { "mode": "NULLABLE", "name": "estado", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "visibility", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "id_registro_notion", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "brochure_name", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "url_brochure", "type": "JSON" },
+  { "mode": "NULLABLE", "name": "notion_brochure_key", "type": "JSON" },
+
+  { "mode": "NULLABLE", "name": "photo_name", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "url_photo", "type": "JSON" },
+  { "mode": "NULLABLE", "name": "notion_photo_key", "type": "JSON" },
+
+  { "mode": "NULLABLE", "name": "listing_price_brochure_name", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "url_listing_price_brochure", "type": "JSON" },
+  { "mode": "NULLABLE", "name": "notion_listing_price_brochure_key", "type": "JSON" },
+
+  { "mode": "NULLABLE", "name": "down_payment", "type": "JSON" }
+]
