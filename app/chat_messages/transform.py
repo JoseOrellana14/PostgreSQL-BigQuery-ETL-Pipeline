@@ -38,7 +38,7 @@ def transform_chat_messages(chat_messages_table, load_date):
         chat_messages_df['load_date'] = load_date
 
         # Explicityly convert date fields to pandas datetime
-        date_fields = ['registro_creado_el', 'registro_actualizado_el', 'mensaje_enviado_el', 'load_date']
+        date_fields = ['created_at', 'updated_at', 'mensaje_enviado_el', 'load_date']
         for field in date_fields:
             if field in chat_messages_df.columns:
                 chat_messages_df[field] = pd.to_datetime(chat_messages_df[field], errors='coerce')

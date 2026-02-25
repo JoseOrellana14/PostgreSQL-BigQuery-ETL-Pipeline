@@ -10,8 +10,8 @@ class Organization:
     commercial_name: Optional[str] = None
     chatbot_enabled_default: Optional[bool] = None
     contractor_status: Optional[str] = None
-    record_created_at: Optional[datetime] = None
-    record_updated_at: Optional[datetime] = None
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
     record_created_by: Optional[str] = None
     updated_by: Optional[str] = None
     contractor: Optional[str] = None

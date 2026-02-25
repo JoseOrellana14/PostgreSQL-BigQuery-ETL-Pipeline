@@ -19,8 +19,8 @@ def extract_organizations(last_loaded=None):
         commercial_name,
         chatbot_enabled_default,
         contractor_status,
-        record_created_at,
-        record_updated_at,
+        record_created_at AS created_at,
+        record_updated_at AS updated_at,
         record_created_by,
         updated_by,
         contractor

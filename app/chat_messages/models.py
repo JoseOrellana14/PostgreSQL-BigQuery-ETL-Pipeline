@@ -13,7 +13,7 @@ class Chat_Message:
     content: Optional[str] = None
     emisor: Optional[str] = None
     receptor: Optional[str] = None
-    registro_creado_el: Optional[datetime] = None
+    created_at: Optional[datetime] = None
     mensaje_enviado_el: Optional[datetime] = None
     tipo_emisor: Optional[str] = None
     estatus: Optional[str] = None
@@ -28,7 +28,7 @@ class Chat_Message:
     file_keywords: Optional[str] = None
     file_character_length: Optional[int] = None
     plataforma_origen: Optional[str] = None
-    registro_actualizado_el: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
 
 
 

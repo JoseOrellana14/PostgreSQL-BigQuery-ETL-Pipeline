@@ -6,8 +6,8 @@
   { "mode": "NULLABLE", "name": "chatbot_enabled_default", "type": "BOOLEAN" },
   { "mode": "NULLABLE", "name": "contractor_status", "type": "STRING" },
 
-  { "mode": "NULLABLE", "name": "record_created_at", "type": "TIMESTAMP" },
-  { "mode": "NULLABLE", "name": "record_updated_at", "type": "TIMESTAMP" },
+  { "mode": "NULLABLE", "name": "created_at", "type": "TIMESTAMP" },
+  { "mode": "NULLABLE", "name": "updated_at", "type": "TIMESTAMP" },
   { "mode": "NULLABLE", "name": "record_created_by", "type": "STRING" },
   { "mode": "NULLABLE", "name": "updated_by", "type": "STRING" },
 

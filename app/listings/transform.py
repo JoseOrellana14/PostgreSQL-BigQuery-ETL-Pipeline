@@ -65,7 +65,7 @@ def transform_listings(listings_table, load_date):
         listings_df['load_date'] = load_date
 
         # Explicityly convert date fields to pandas datetime
-        date_fields = ['record_created_at', 'record_updated_at', 'record_deleted_at', 'load_date']
+        date_fields = ['created_at', 'updated_at', 'record_deleted_at', 'load_date']
         for field in date_fields:
             if field in listings_df.columns:
                 listings_df[field] = pd.to_datetime(listings_df[field], errors='coerce')

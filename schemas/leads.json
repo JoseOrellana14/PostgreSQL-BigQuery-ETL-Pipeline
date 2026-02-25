@@ -26,8 +26,8 @@
 
   { "mode": "NULLABLE", "name": "id_registro_notion", "type": "STRING" },
 
-  { "mode": "NULLABLE", "name": "registro_creado_el", "type": "TIMESTAMP" },
-  { "mode": "NULLABLE", "name": "registro_ultima_actualizacion", "type": "TIMESTAMP" },
+  { "mode": "NULLABLE", "name": "created_at", "type": "TIMESTAMP" },
+  { "mode": "NULLABLE", "name": "updated_at", "type": "TIMESTAMP" },
 
   { "mode": "NULLABLE", "name": "prospecto_intencion_categoria", "type": "STRING" },
   { "mode": "NULLABLE", "name": "prospecto_urgencia", "type": "STRING" },

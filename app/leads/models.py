@@ -22,8 +22,8 @@ class Lead:
     asistente_resumen: Optional[str] = None
     id_registro_notion: Optional[str] = None
     proxima_cita_fin: Optional[datetime] = None
-    registro_creado_el: Optional[datetime] = None
-    registro_ultima_actualizacion: Optional[datetime] = None
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
     prospecto_intencion_categoria: Optional[str] = None
     prospecto_urgencia: Optional[str] = None
     prospecto_perfil: Optional[str] = None

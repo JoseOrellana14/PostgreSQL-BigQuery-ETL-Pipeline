@@ -22,7 +22,7 @@ def extract_chat_messages(last_loaded=None):
         content,
         emisor,
         receptor,
-        registro_creado_el,
+        registro_creado_el AS created_at,
         mensaje_enviado_el,
         tipo_emisor,
         estatus,
@@ -37,7 +37,7 @@ def extract_chat_messages(last_loaded=None):
         file_keywords,
         file_character_length,
         plataforma_origen,
-        registro_actualizado_el
+        registro_actualizado_el AS updated_at
     FROM public.chat_messages
     """
 

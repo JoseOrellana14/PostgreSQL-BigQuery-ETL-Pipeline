@@ -38,7 +38,7 @@ def transform_listing_projects(listing_projects_table, load_date):
         listing_projects_df['load_date'] = load_date
 
         # Explicityly convert date fields to pandas datetime
-        date_fields = ['delivery_date', 'record_created_at', 'record_updated_at', 'record_deleted_at', 'load_date']
+        date_fields = ['delivery_date', 'created_at', 'updated_at', 'record_deleted_at', 'load_date']
         for field in date_fields:
             if field in listing_projects_df.columns:
                 listing_projects_df[field] = pd.to_datetime(listing_projects_df[field], errors='coerce')

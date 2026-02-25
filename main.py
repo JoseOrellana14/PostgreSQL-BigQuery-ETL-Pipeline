@@ -2,7 +2,7 @@ import logging
 from app import create_app
 from app.etl import run_etl
 from flask import request as flask_request
-from logging.config import setup_logging
+from logging_config import setup_logging
 
 # Configure global logging
 setup_logging()

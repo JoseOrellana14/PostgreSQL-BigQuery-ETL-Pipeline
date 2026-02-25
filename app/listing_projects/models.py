@@ -18,8 +18,8 @@ class Listing_Project:
     total_units: Optional[int] = None
     description: Optional[str] = None
     record_status: Optional[int] = None
-    record_created_at: Optional[datetime] = None
-    record_updated_at: Optional[datetime] = None
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
     floors_count: Optional[int] = None
     estado: Optional[str] = None
     visibility: Optional[str] = None

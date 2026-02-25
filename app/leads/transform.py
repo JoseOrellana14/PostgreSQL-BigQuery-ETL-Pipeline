@@ -38,7 +38,7 @@ def transform_leads(leads_table, load_date):
         leads_df['load_date'] = load_date
 
         # Explicityly convert date fields to pandas datetime
-        date_fields = ['proxima_cita_inicio', 'primer_mensaje_recibido', 'ultimo_mensaje_recibido', 'proxima_cita_fin', 'registro_creado_el', 'registro_ultima_actualizacion', 'registro_eliminado_el', 'ultimo_analisis_ia_at', 'last_agent_message_at', 'load_date']
+        date_fields = ['proxima_cita_inicio', 'primer_mensaje_recibido', 'ultimo_mensaje_recibido', 'proxima_cita_fin', 'created_at', 'updated_at', 'registro_eliminado_el', 'ultimo_analisis_ia_at', 'last_agent_message_at', 'load_date']
         for field in date_fields:
             if field in leads_df.columns:
                 leads_df[field] = pd.to_datetime(leads_df[field], errors='coerce')

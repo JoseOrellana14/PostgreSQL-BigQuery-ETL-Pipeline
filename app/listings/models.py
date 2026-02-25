@@ -22,9 +22,9 @@ class Listing:
     price_sqm: Optional[float] = None
     qualitative_description: Optional[str] = None
     record_status: Optional[int] = None
-    record_created_at: Optional[datetime] = None
+    created_at: Optional[datetime] = None
     record_deleted_at: Optional[datetime] = None
-    record_updated_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
     record_created_by: Optional[str] = None
     record_updated_by: Optional[str] = None
     name: Optional[str] = None

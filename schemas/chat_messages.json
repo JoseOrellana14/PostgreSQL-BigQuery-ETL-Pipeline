@@ -10,7 +10,7 @@
   { "mode": "NULLABLE", "name": "emisor", "type": "STRING" },
   { "mode": "NULLABLE", "name": "receptor", "type": "STRING" },
 
-  { "mode": "NULLABLE", "name": "registro_creado_el", "type": "TIMESTAMP" },
+  { "mode": "NULLABLE", "name": "created_at", "type": "TIMESTAMP" },
   { "mode": "NULLABLE", "name": "mensaje_enviado_el", "type": "TIMESTAMP" },
 
   { "mode": "NULLABLE", "name": "tipo_emisor", "type": "STRING" },
@@ -29,5 +29,5 @@
   { "mode": "NULLABLE", "name": "file_character_length", "type": "INTEGER" },
 
   { "mode": "NULLABLE", "name": "plataforma_origen", "type": "STRING" },
-  { "mode": "NULLABLE", "name": "registro_actualizado_el", "type": "TIMESTAMP" }
+  { "mode": "NULLABLE", "name": "updated_at", "type": "TIMESTAMP" }
 ]
