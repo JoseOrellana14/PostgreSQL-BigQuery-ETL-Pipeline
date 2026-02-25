@@ -20,7 +20,7 @@
   { "mode": "NULLABLE", "name": "bedrooms", "type": "INTEGER" },
   { "mode": "NULLABLE", "name": "bathrooms", "type": "INTEGER" },
 
-  { "mode": "NULLABLE", "name": "area_aqm", "type": "FLOAT" },
+  { "mode": "NULLABLE", "name": "area_sqm", "type": "FLOAT" },
 
   { "mode": "REPEATED", "name": "amenities", "type": "STRING" },
 
@@ -66,5 +66,6 @@
   { "mode": "NULLABLE", "name": "notion_record_status", "type": "STRING" },
 
   { "mode": "NULLABLE", "name": "floor_level", "type": "INTEGER" },
-  { "mode": "NULLABLE", "name": "last_opportunity", "type": "BOOLEAN" }
+  { "mode": "NULLABLE", "name": "last_opportunity", "type": "BOOLEAN" },
+  { "mode": "NULLABLE", "name": "load_date", "type": "TIMESTAMP"}
 ]

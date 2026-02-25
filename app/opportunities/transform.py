@@ -98,5 +98,5 @@ def transform_opportunities(opportunities_table, load_date):
         return result
     
     except Exception:
-        logger.exception("Error transforming property opportunities data")
+        logger.exception("Error transforming opportunities data")
         raise

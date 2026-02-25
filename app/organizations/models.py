@@ -6,7 +6,7 @@ from typing import Optional, List, Dict, Any
 class Organization:
     """Organization data model."""
     organization_id: int
-    legal_name: str
+    legal_name: Optional[str] = None
     commercial_name: Optional[str] = None
     chatbot_enabled_default: Optional[bool] = None
     contractor_status: Optional[str] = None

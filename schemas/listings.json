@@ -65,5 +65,6 @@
 
   { "mode": "NULLABLE", "name": "photo_name", "type": "STRING" },
   { "mode": "NULLABLE", "name": "url_photo", "type": "JSON" },
-  { "mode": "NULLABLE", "name": "notion_photo_key", "type": "JSON" }
+  { "mode": "NULLABLE", "name": "notion_photo_key", "type": "JSON" },
+  { "mode": "NULLABLE", "name": "load_date", "type": "TIMESTAMP"}
 ]

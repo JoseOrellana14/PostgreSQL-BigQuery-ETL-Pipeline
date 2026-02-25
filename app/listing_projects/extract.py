@@ -16,7 +16,6 @@ def extract_listing_projects(last_loaded=None):
     SELECT
         id as listing_project_id,
         user_id,
-        listing_id,
         name,
         developer,
         city,

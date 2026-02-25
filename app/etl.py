@@ -36,7 +36,7 @@ def run_etl():
     bq_table_env_var="BQ_ORGANIZATIONS_TABLE",
     schema_path=ORGANIZATION_SCHEMA_PATH,
     key_column="organization_id",
-    updated_at_col="record_updated_at",
+    updated_at_col="updated_at",
     )
     print("Organizations data loaded.")
 
@@ -84,7 +84,7 @@ def run_etl():
     bq_table_env_var="BQ_LISTINGS_TABLE",
     schema_path=LISTING_SCHEMA_PATH,
     key_column="listing_id",
-    updated_at_col="record_updated_at",
+    updated_at_col="updated_at",
     )
     print("listings data loaded.")
 
@@ -132,7 +132,7 @@ def run_etl():
     bq_table_env_var="BQ_CHAT_MESSAGES_TABLE",
     schema_path=CHAT_MESSAGE_SCHEMA_PATH,
     key_column="chat_message_id",
-    updated_at_col="registro_actualizado_el",
+    updated_at_col="updated_at",
     )
     print("chat messages data loaded.")
 

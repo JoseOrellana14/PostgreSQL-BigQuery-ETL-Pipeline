@@ -22,7 +22,7 @@
     {
         "mode": "NULLABLE",
         "name": "phone",
-        "type": "STRING"
+        "type": "INTEGER"
     },
     {
         "mode": "NULLABLE",

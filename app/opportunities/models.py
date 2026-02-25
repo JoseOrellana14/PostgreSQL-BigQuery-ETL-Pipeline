@@ -20,7 +20,7 @@ class Opportunity:
     neighborhood: Optional[str] = None
     bedrooms: Optional[int] = None
     bathrooms: Optional[int] = None
-    area_aqm: Optional[float] = None
+    area_sqm: Optional[float] = None
     amenities: Optional[List[str]] = None
     budget: Optional[float] = None
     target_currency: Optional[str] = None

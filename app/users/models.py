@@ -10,7 +10,7 @@ class User:
     name: Optional[str] = None
     last_name: Optional[str] = None
     email: Optional[str] = None
-    phone: Optional[str] = None
+    phone: Optional[int] = None
     role: Optional[str] = None
     status: Optional[str] = None
     chatbot_enabled_user: Optional[bool] = None

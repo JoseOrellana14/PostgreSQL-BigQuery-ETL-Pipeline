@@ -43,5 +43,6 @@
   { "mode": "NULLABLE", "name": "registro_interno_creado_por", "type": "STRING" },
 
   { "mode": "NULLABLE", "name": "ultimo_analisis_ia_at", "type": "TIMESTAMP" },
-  { "mode": "NULLABLE", "name": "last_agent_message_at", "type": "TIMESTAMP" }
+  { "mode": "NULLABLE", "name": "last_agent_message_at", "type": "TIMESTAMP" },
+  { "mode": "NULLABLE", "name": "load_date", "type": "TIMESTAMP"}
 ]

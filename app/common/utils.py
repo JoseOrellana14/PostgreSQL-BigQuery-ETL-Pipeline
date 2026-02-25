@@ -76,7 +76,25 @@ def convert_column_types(table, schema):
         elif column_type == 'STRING':
             table = etl.convert(table, column_name, lambda v: str(v) if v is not None else None)
         elif column_type == 'JSON':
-            table = etl.convert(table, column_name, lambda v: json(v) if v is not None else None)
+
+            def to_json_str(v):
+                if v is None or (isinstance(v, float) and np.isnan(v)):
+                    return None
+                if isinstance(v, (dict, list)):
+                    return json.dumps(v, ensure_ascii=False)
+                if isinstance(v, str):
+                    s = v.strip()
+                    if s == "" or s.lower() in ("nan", "none", "null"):
+                        return None
+                    try:
+                        json.loads(s)
+                        return s
+                    except Exception:
+                        return None
+                return json.dumps(v, ensure_ascii=False)
+
+            table = etl.convert(table, column_name, to_json_str)
+            
         elif column_type == 'BOOLEAN':
             table = etl.convert(table, column_name, lambda v: bool(v) if isinstance(v, bool) else (
                 str(v).strip().lower() == 'true' if v not in (None, '', 'nan', 'none') else None
@@ -106,25 +124,62 @@ def get_last_loaded_timestamp(table_name, dataset):
         print(f"[DEBUG] Last updated_at loaded on {dataset}.{table_name}: {last_update}")
         return last_update
     
-def merge_dataframe_to_bq(df, table_id, key_column, updated_at_col, bq_schema=None, credentials=None):
+def merge_dataframe_to_bq(
+    df,
+    table_id,
+    key_column,
+    updated_at_col,
+    bq_schema_final=None,
+    bq_schema_staging=None,
+    credentials=None
+):
     """Performs a dynamic MERGE (upsert) of a DataFrame into a BigQuery table."""
     client = bigquery.Client(credentials=credentials or get_bq_credentials())
 
-    # Convert NaT in datetime columns to None (important for BigQuery)
-    # Enforce datetime conversion just for TIMESTAMP column type according to schema
-    timestamp_fields = [field.name for field in bq_schema if field.field_type == "TIMESTAMP"]
+    if bq_schema_final is None or bq_schema_staging is None:
+        raise ValueError("You must provide both bq_schema_final and bq_schema_staging")
+
+    # 1) Convert NaT in datetime columns to None for TIMESTAMP fields (use FINAL schema for truth)
+    timestamp_fields = [field.name for field in bq_schema_final if field.field_type == "TIMESTAMP"]
     for col in timestamp_fields:
         if col in df.columns:
             df[col] = pd.to_datetime(df[col], errors="coerce")
             df[col] = df[col].where(df[col].notnull(), None)
 
+    # 2) For JSON fields: ensure the dataframe contains JSON as STRING (staging schema expects STRING)
+    json_fields = {field.name for field in bq_schema_final if field.field_type == "JSON"}
+    for col in json_fields:
+        if col in df.columns:
+            def to_json_str(v):
+                if v is None or (isinstance(v, float) and np.isnan(v)):
+                    return None
+                if isinstance(v, (dict, list)):
+                    return json.dumps(v, ensure_ascii=False)
+                return str(v)
+            df[col] = df[col].apply(to_json_str)
+
+    # 3) Load DF into TEMP table using STAGING schema (JSON -> STRING)
     temp_table_id = f"{table_id}_temp"
-    job_config = bigquery.LoadJobConfig(write_disposition="WRITE_TRUNCATE", schema=bq_schema) #Enforce real type not inferred
+    job_config = bigquery.LoadJobConfig(
+        write_disposition="WRITE_TRUNCATE",
+        schema=bq_schema_staging
+    )
     client.load_table_from_dataframe(df, temp_table_id, job_config=job_config).result()
 
+    # 4) Build MERGE query with PARSE_JSON for JSON fields
     all_columns = df.columns.tolist()
     update_columns = [col for col in all_columns if col != key_column]
-    update_set = ", ".join([f"T.{col} = S.{col}" for col in update_columns])
+
+    def s_expr(col: str) -> str:
+        # How to read from staging (S) into final (T)
+        if col in json_fields:
+            return f"PARSE_JSON(S.{col})"
+        return f"S.{col}"
+
+    update_set = ", ".join([f"T.{col} = {s_expr(col)}" for col in update_columns])
+
+    insert_cols = ", ".join(all_columns)
+    insert_vals = ", ".join([s_expr(col) for col in all_columns])
 
     merge_query = f"""
     MERGE `{table_id}` T
@@ -133,8 +188,8 @@ def merge_dataframe_to_bq(df, table_id, key_column, updated_at_col, bq_schema=No
     WHEN MATCHED AND (T.{updated_at_col} IS NULL OR S.{updated_at_col} > T.{updated_at_col}) THEN
       UPDATE SET {update_set}
     WHEN NOT MATCHED THEN
-      INSERT ({', '.join(all_columns)})
-      VALUES ({', '.join([f"S.{col}" for col in all_columns])})
+      INSERT ({insert_cols})
+      VALUES ({insert_vals})
     """
 
     client.query(merge_query).result()
@@ -154,6 +209,28 @@ def convert_json_schema_to_bq_schema(schema_json):
 
     return [
         bigquery.SchemaField(field['name'], type_mapping.get(field['type'], 'STRING'), mode=field.get('mode', 'NULLABLE'))
+        for field in schema_json
+    ]
+
+def convert_json_schema_to_bq_schema_for_staging(schema_json):
+    """
+    Igual que el schema final, pero JSON -> STRING para poder cargar desde DataFrame (pyarrow).
+    """
+    type_mapping = {
+        'STRING': 'STRING',
+        'INTEGER': 'INT64',
+        'FLOAT': 'FLOAT64',
+        'TIMESTAMP': 'TIMESTAMP',
+        'BOOLEAN': 'BOOL',
+        'JSON': 'STRING',  # <-- CLAVE: staging soporta STRING
+    }
+
+    return [
+        bigquery.SchemaField(
+            field['name'],
+            type_mapping.get(field['type'], 'STRING'),
+            mode=field.get('mode', 'NULLABLE')
+        )
         for field in schema_json
     ]
 
@@ -192,7 +269,7 @@ def load_dataframe_with_merge(
     """
 
     try:
-        # Validar env vars
+
         validate_env_variables("BQ_PROJECT", "BQ_DATASET", bq_table_env_var)
 
         project = os.getenv("BQ_PROJECT")
@@ -204,17 +281,23 @@ def load_dataframe_with_merge(
 
         table_id = f"{project}.{dataset}.{table_name}"
 
-        # Leer schema JSON y convertirlo a SchemaField[]
-        schema = load_schema(schema_path)
-        bq_schema = convert_json_schema_to_bq_schema(schema)
+        # 1) Leer schema JSON
+        schema_json = load_schema(schema_path)
 
-        # Usar tu función genérica de MERGE
+        # 2) Schema FINAL (JSON real)
+        bq_schema_final = convert_json_schema_to_bq_schema(schema_json)
+
+        # 3) Schema STAGING (JSON -> STRING)
+        bq_schema_staging = convert_json_schema_to_bq_schema_for_staging(schema_json)
+
+        # 4) MERGE usando staging para cargar DF y final para castear JSON en el MERGE
         merge_dataframe_to_bq(
             df=df,
             table_id=table_id,
             key_column=key_column,
             updated_at_col=updated_at_col,
-            bq_schema=bq_schema,
+            bq_schema_final=bq_schema_final,
+            bq_schema_staging=bq_schema_staging,
             credentials=get_bq_credentials(),
         )
 

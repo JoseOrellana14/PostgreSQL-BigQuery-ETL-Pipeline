@@ -19,7 +19,7 @@ def extract_users(last_loaded=None):
         name,
         last_name,
         email,
-        phone
+        phone,
         role,
         status,
         chatbot_enabled_user,
