@@ -52,6 +52,9 @@ class Listing:
     photo_name: Optional[str] = None
     url_photo: Optional[Dict[str, Any]] = None
     notion_photo_key: Optional[Dict[str, Any]] = None
+    down_payment: Optional[str] = None
+    exchange_rate: Optional[float] = None
+    price_adjusted: Optional[float] = None
     
 
     @classmethod

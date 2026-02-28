@@ -22,7 +22,8 @@ def validate_money_field(value, field_name):
         limits = {
             'area_sqm': 10000000,  # 10 million sqm for area (acres)
             'price': 100000000,  # 100 million for property price
-            'price_sqm': 50000  # 50,000 per sqm
+            'price_sqm': 50000,  # 50,000 per sqm
+            'price_adjusted': 100000000,  # 100 million for adjusted price
         }
         
         # Get the limit for this field
@@ -74,7 +75,8 @@ def transform_listings(listings_table, load_date):
         money_fields = [
             'area_sqm',
             'price',
-            'price_sqm'
+            'price_sqm',
+            'price_adjusted'
         ]
         
         for field in money_fields:

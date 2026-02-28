@@ -60,7 +60,10 @@ def extract_listings(last_loaded=None):
         photo_name,
         url_photo,
         notion_photo_key,
-        record_deleted_at
+        record_deleted_at,
+        down_payment,
+        exchange_rate,
+        price_adjusted
     FROM public.listings
     """
 

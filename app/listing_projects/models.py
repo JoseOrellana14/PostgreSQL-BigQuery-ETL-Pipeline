@@ -37,6 +37,9 @@ class Listing_Project:
     url_listing_price_brochure: Optional[Dict[str, Any]] = None
     notion_listing_price_brochure_key: Optional[Dict[str, Any]] = None
     down_payment: Optional[Dict[str, Any]] = None
+    address: Optional[str] = None
+    google_maps_link: Optional[str] = None
+    amenities: Optional[Dict[str, Any]] = None
  
 
     @classmethod

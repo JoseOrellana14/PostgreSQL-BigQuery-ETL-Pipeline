@@ -66,5 +66,8 @@
   { "mode": "NULLABLE", "name": "photo_name", "type": "STRING" },
   { "mode": "NULLABLE", "name": "url_photo", "type": "JSON" },
   { "mode": "NULLABLE", "name": "notion_photo_key", "type": "JSON" },
-  { "mode": "NULLABLE", "name": "load_date", "type": "TIMESTAMP"}
+  { "mode": "NULLABLE", "name": "load_date", "type": "TIMESTAMP"},
+  { "mode": "NULLABLE", "name": "down_payment", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "exchange_rate", "type": "FLOAT" },
+  { "mode": "NULLABLE", "name": "price_adjusted", "type": "FLOAT" }
 ]

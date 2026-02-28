@@ -29,6 +29,7 @@ class Chat_Message:
     file_character_length: Optional[int] = None
     plataforma_origen: Optional[str] = None
     updated_at: Optional[datetime] = None
+    execution_id: Optional[str] = None
 
 
 

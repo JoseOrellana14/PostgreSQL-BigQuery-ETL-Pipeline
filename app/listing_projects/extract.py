@@ -45,7 +45,10 @@ def extract_listing_projects(last_loaded=None):
         listing_price_brochure_name,
         url_listing_price_brochure,
         notion_listing_price_brochure_key,
-        down_payment
+        down_payment,
+        address,
+        google_maps_link,
+        amenities
     FROM public.listing_projects
     """
 

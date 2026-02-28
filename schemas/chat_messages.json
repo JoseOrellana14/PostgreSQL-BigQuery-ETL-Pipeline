@@ -30,5 +30,6 @@
 
   { "mode": "NULLABLE", "name": "plataforma_origen", "type": "STRING" },
   { "mode": "NULLABLE", "name": "updated_at", "type": "TIMESTAMP" },
-  { "mode": "NULLABLE", "name": "load_date", "type": "TIMESTAMP"}
+  { "mode": "NULLABLE", "name": "load_date", "type": "TIMESTAMP"},
+  { "mode": "NULLABLE", "name": "execution_id", "type": "STRING" }
 ]

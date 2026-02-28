@@ -42,5 +42,8 @@
   { "mode": "NULLABLE", "name": "notion_listing_price_brochure_key", "type": "JSON" },
 
   { "mode": "NULLABLE", "name": "down_payment", "type": "JSON" },
-  { "mode": "NULLABLE", "name": "load_date", "type": "TIMESTAMP"}
+  { "mode": "NULLABLE", "name": "load_date", "type": "TIMESTAMP"},
+  { "mode": "NULLABLE", "name": "address", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "google_maps_link", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "amenities", "type": "JSON" }
 ]
