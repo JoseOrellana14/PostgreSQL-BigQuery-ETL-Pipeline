@@ -3,7 +3,7 @@ import pandas as pd
 import json
 import logging
 from app.common.utils import preview_table, convert_column_types, load_schema
-from app.listings.models import LISTING_SALE_SCHEMA_PATH, LISTING_SALE_TABLE_NAME
+from app.listing_sales.models import LISTING_SALE_SCHEMA_PATH, LISTING_SALE_TABLE_NAME
 from logging_config import setup_logging
 
 setup_logging()
@@ -35,7 +35,7 @@ def validate_money_field(value, field_name):
     except (ValueError, TypeError):
         return None
 
-def transform_listings_sales(listings_sales_table, load_date):
+def transform_listing_sales(listings_sales_table, load_date):
     """Transform listings sales data and convert to a clean DataFrame"""
     try:
         # Load the schema

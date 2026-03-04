@@ -38,12 +38,12 @@ def extract_listing_sales(last_loaded=None):
     if last_loaded:
         query += f"""
         WHERE (
-            record_created_at > '{last_loaded}'
-            OR record_updated_at > '{last_loaded}'
+            created_at > '{last_loaded}'
+            OR updated_at > '{last_loaded}'
         )
         """
     else:
-        query += " WHERE record_created_at IS NOT NULL"
+        query += " WHERE created_at IS NOT NULL"
 
     try:
         # Use a context manager to handle the database connection

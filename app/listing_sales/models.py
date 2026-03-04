@@ -37,4 +37,4 @@ class Listing_Sale:
 LISTING_SALE_SCHEMA_PATH = 'schemas/listing_sales.json'
 
 # Table names
-LISTING_SALE_TABLE_NAME = 'raw_listings_sales'
+LISTING_SALE_TABLE_NAME = 'raw_listing_sales'
