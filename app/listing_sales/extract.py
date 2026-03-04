@@ -8,48 +8,30 @@ from logging_config import setup_logging
 setup_logging()
 logger = logging.getLogger(__name__)
 
-def extract_listing_projects(last_loaded=None):
+def extract_listing_sales(last_loaded=None):
     """Extract property units data from PostgreSQL database using PETL"""
 
     #Define the SQL query to extract listings
     query = f"""
     SELECT
-        id as listing_project_id,
+        id as listing_sale_id,
+        organization_id,
         user_id,
-        name,
-        developer,
-        city,
-        neighborhood,
-        neighborhood_macro,
-        project_type,
-        project_status,
-        delivery_date,
-        total_units,
-        description,
-        record_status,
-        record_created_at AS created_at,
-        record_updated_at AS updated_at,
-        floors_count,
-        estado,
-        visibility,
-        id_registro_notion,
-        record_deleted_at,
-        record_created_by,
-        record_updated_by,
-        brochure_name,
-        url_brochure,
-        notion_brochure_key,
-        photo_name,
-        url_photo,
-        notion_photo_key,
-        listing_price_brochure_name,
-        url_listing_price_brochure,
-        notion_listing_price_brochure_key,
-        down_payment,
-        address,
-        google_maps_link,
-        amenities
-    FROM public.listing_projects
+        lead_id,
+        opportunity_id,
+        listing_id,
+        listing_project_id,
+        sale_price,
+        currency,
+        closed_at,
+        sale_operation,
+        state,
+        created_at,
+        updated_at,
+        created_by,
+        updated_by,
+        deleted_at
+    FROM public.listing_sales
     """
 
     # Compare with last_loaded date for incremental load
@@ -76,5 +58,5 @@ def extract_listing_projects(last_loaded=None):
         return listings_table
 
     except Exception:
-        logger.exception("Error extracting listings projects data")
+        logger.exception("Error extracting listing sales data")
         raise

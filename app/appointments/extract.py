@@ -34,7 +34,8 @@ def extract_appointments(last_loaded=None):
         reminder_sent_at,
         summary,
         post_followup_at,
-        post_followup_sent_at
+        post_followup_sent_at,
+        source_appointment
     FROM public.appointments
     """
 

@@ -27,6 +27,7 @@
   { "mode": "NULLABLE", "name": "reminder_sent_at", "type": "TIMESTAMP" },
 
   { "mode": "NULLABLE", "name": "summary", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "source_appointment", "type": "STRING" },
 
   { "mode": "NULLABLE", "name": "post_followup_at", "type": "TIMESTAMP" },
   { "mode": "NULLABLE", "name": "post_followup_sent_at", "type": "TIMESTAMP" },

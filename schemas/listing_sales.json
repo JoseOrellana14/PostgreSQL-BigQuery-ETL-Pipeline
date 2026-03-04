@@ -1,0 +1,23 @@
+[
+  { "mode": "REQUIRED", "name": "listing_sale_id", "type": "INTEGER" },
+  { "mode": "REQUIRED", "name": "organization_id", "type": "INTEGER" },
+  { "mode": "REQUIRED", "name": "user_id", "type": "INTEGER" },
+
+  { "mode": "NULLABLE", "name": "lead_id", "type": "INTEGER" },
+  { "mode": "NULLABLE", "name": "opportunity_id", "type": "INTEGER" },
+  { "mode": "NULLABLE", "name": "listing_id", "type": "INTEGER" },
+  { "mode": "NULLABLE", "name": "listing_project_id", "type": "INTEGER" },
+
+  { "mode": "NULLABLE", "name": "sale_price", "type": "FLOAT" },
+  { "mode": "NULLABLE", "name": "sale_operation", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "currency", "type": "STRING" },
+
+  { "mode": "NULLABLE", "name": "closed_at", "type": "TIMESTAMP" },
+  { "mode": "NULLABLE", "name": "state", "type": "INTEGER" },
+
+  { "mode": "NULLABLE", "name": "created_at", "type": "TIMESTAMP" },
+  { "mode": "NULLABLE", "name": "updated_at", "type": "TIMESTAMP" },
+  { "mode": "NULLABLE", "name": "created_by", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "updated_by", "type": "STRING" },
+  { "mode": "NULLABLE", "name": "deleted_at", "type": "TIMESTAMP" }
+]

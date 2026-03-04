@@ -26,6 +26,7 @@ class Appointment:
     summary: Optional[str] = None
     post_followup_at: Optional[datetime] = None
     post_followup_sent_at: Optional[datetime] = None
+    source_appointment: Optional[str] = None
     
 
     @classmethod

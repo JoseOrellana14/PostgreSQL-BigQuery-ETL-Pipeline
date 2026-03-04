@@ -6,6 +6,7 @@ from app.chat_messages import extract_chat_messages, transform_chat_messages, CH
 from app.appointments import extract_appointments, transform_appointments, APPOINTMENT_SCHEMA_PATH
 from app.leads import extract_leads, transform_leads, LEAD_SCHEMA_PATH
 from app.listing_projects import extract_listing_projects, transform_listing_projects, LISTING_PROJECT_SCHEMA_PATH
+from app.listing_sales import extract_listing_sales, transform_listing_sales, LISTING_SALE_SCHEMA_PATH
 from app.common.utils import get_load_date, get_last_loaded_timestamp, load_dataframe_with_merge
 
 def run_etl():
@@ -207,6 +208,32 @@ def run_etl():
     updated_at_col="updated_at",
     )
     print("listing projects data loaded.")
+
+
+    # =================
+    # Listing Sales ETL
+    # =================
+    last_loaded_listing_sales = get_last_loaded_timestamp("raw_listing_sales", dataset=DATASET)
+    print(f"Last loaded listing sales: {last_loaded_listing_sales}")
+
+    print("Extracting listing sales data...")
+    listing_sales = extract_listing_sales(last_loaded_listing_sales)
+    print(f"Extracted listing sales data.")
+
+    print("Transforming listing sales data...")
+    listing_sales_df = transform_listing_sales(listing_sales, load_date)
+    print(f"Transformed listing sales data.")
+
+    print("Loading listing sales data into BigQuery...")
+    load_dataframe_with_merge(
+    df=listing_sales_df,
+    bq_table_env_var="BQ_LISTING_SALES_TABLE",
+    schema_path=LISTING_SALE_SCHEMA_PATH,
+    key_column="listing_sale_id",
+    updated_at_col="updated_at",
+    )
+    print("listing sales data loaded.")
+
 
 
 if __name__ == "__main__":
