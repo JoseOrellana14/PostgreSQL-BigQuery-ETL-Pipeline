@@ -30,6 +30,7 @@ class Chat_Message:
     plataforma_origen: Optional[str] = None
     updated_at: Optional[datetime] = None
     execution_id: Optional[str] = None
+    message_class: Optional[str] = None
 
 
 

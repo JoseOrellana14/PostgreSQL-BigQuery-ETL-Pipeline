@@ -38,7 +38,8 @@ def extract_chat_messages(last_loaded=None):
         file_character_length,
         plataforma_origen,
         registro_actualizado_el AS updated_at,
-        execution_id
+        execution_id,
+        message_class
     FROM public.chat_messages
     """
 
